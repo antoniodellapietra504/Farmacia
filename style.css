@@ -356,6 +356,7 @@ footer {
     .menu-toggle {
         display: block; /* Mostra l'hamburger */
         cursor: pointer;
+        z-index: 1001;
     }
 
     .menu-toggle .bar {
@@ -368,17 +369,17 @@ footer {
     }
 
     .nav-links {
-        display: none;
-        position: absolute;
+        position: fixed;
         top: 70px;
         left: -100%; /* Nasconde il menu a sinistra */
         flex-direction: column;
         background-color: white;
         width: 100%;
         text-align: center;
-        transition: 0.3s;
+        transition: 0.4s ease-in-out;
         box-shadow: 0 10px 20px rgba(0,0,0,0.05);
         padding: 40px 0;
+        display: flex;
     }
 
     .nav-links.active {
@@ -391,5 +392,17 @@ footer {
 
     .hero h1 {
         font-size: 2.2rem;
+    }
+    
+    #mobile-menu.is-active .bar:nth-child(2) {
+        opacity: 0;
+    }
+
+    #mobile-menu.is-active .bar:nth-child(1) {
+        transform: translateY(8px) rotate(45deg);
+    }
+
+    #mobile-menu.is-active .bar:nth-child(3) {
+        transform: translateY(-8px) rotate(-45deg);
     }
 }
