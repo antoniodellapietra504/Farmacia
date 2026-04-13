@@ -83,6 +83,23 @@ a {
     border-color: var(--text-main);
 }
 
+.btn-nav {
+    background-color: var(--primary-color);
+    color: white !important; /* Forza il testo bianco */
+    padding: 10px 24px;
+    border-radius: 50px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    transition: all 0.3s ease;
+    border: none;
+}
+
+.btn-nav:hover {
+    background-color: var(--primary-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(34, 197, 94, 0.3);
+}
+
 /* =========================================
    4. HEADER E NAVBAR 
    ========================================= */
@@ -191,4 +208,117 @@ header {
     background-color: var(--bg-secondary);
     border-radius: 30px;
     margin-left: 50px;
+}
+
+/* =========================================
+   6. CHI SIAMO (Wellness Hub)
+   ========================================= */
+.wellness-hub {
+    background-color: var(--bg-secondary); /* Sfondo grigio chiaro */
+    padding: 100px 5%;
+    display: flex;
+    align-items: center;
+    gap: 80px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.hub-content {
+    flex: 1;
+}
+
+.wellness-hub h2 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+    color: var(--text-main);
+}
+
+.hub-image {
+    flex: 1;
+    height: 400px;
+    background-color: #ffffff;
+    border-radius: 24px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+}
+
+/* =========================================
+   7. SERVIZI (Grid)
+   ========================================= */
+.services {
+    padding: 100px 5%;
+    max-width: 1200px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.services h2 {
+    font-size: 2.5rem;
+    margin-bottom: 60px;
+}
+
+.services-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 colonne su desktop */
+    gap: 30px;
+}
+
+.service-card {
+    background: white;
+    padding: 40px;
+    border-radius: 24px;
+    border: 1px solid #f1f5f9;
+    transition: all 0.3s ease;
+    text-align: left;
+}
+
+.service-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.05);
+    border-color: var(--primary-color);
+}
+
+.icon-placeholder {
+    width: 50px;
+    height: 50px;
+    background-color: #f0fdf4; /* Verde chiarissimo */
+    border-radius: 12px;
+    margin-bottom: 20px;
+}
+
+/* =========================================
+   8. CONTATTI E FOOTER (Sfondo Scuro)
+   ========================================= */
+.contacts-section {
+    background-color: var(--text-main); /* Grigio Antracite scuro */
+    color: white;
+    padding: 100px 5% 60px;
+}
+
+.contacts-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.info-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 40px;
+    margin-top: 50px;
+}
+
+.info-item h4 {
+    color: var(--primary-color);
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+footer {
+    background-color: var(--text-main);
+    color: var(--text-light);
+    text-align: center;
+    padding: 30px 5%;
+    border-top: 1px solid rgba(255,255,255,0.1);
+    font-size: 0.9rem;
 }
