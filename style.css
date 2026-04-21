@@ -3,8 +3,8 @@
    ========================================= */
 :root {
     /* Palette "Tech/Benessere" basata sulla tua reference */
-    --primary-color: #22c55e; /* Verde brillante e fresco */
-    --primary-hover: #16a34a; /* Verde scuro per l'hover dei bottoni */
+    --primary-color: #4BA46F; /* Verde brillante e fresco */
+    --primary-hover: #3D8A5B; /* Verde scuro per l'hover dei bottoni */
     --bg-color: #ffffff;      /* Bianco puro per lo sfondo principale */
     --bg-secondary: #f8fafc;  /* Grigio chiarissimo per staccare le sezioni */
     --text-main: #0f172a;     /* Antracite scuro per i testi (molto più elegante del nero puro) */
@@ -181,6 +181,7 @@ header {
 .hero-content {
     flex: 1;
     max-width: 650px;
+    text-align: left;
 }
 
 .hero h1 {
@@ -205,13 +206,22 @@ header {
     gap: 15px;
 }
 
+/* Trova e aggiorna questa sezione nel tuo style.css */
 .hero-image {
     flex: 1;
-    /* Temporaneo: un rettangolo grigio in attesa dell'immagine definitiva */
-    height: 500px;
-    background-color: var(--bg-secondary);
-    border-radius: 30px;
-    margin-left: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 0;
+    margin-right: 50px;
+    /* Abbiamo rimosso background-color e height fissa per adattarci all'immagine */
+}
+
+.hero-image img {
+    max-width: 100%; /* L'immagine non supererà mai la larghezza del contenitore */
+    height: auto;    /* Mantiene le proporzioni originali */
+    border-radius: 30px; /* Opzionale: mantiene gli angoli arrotondati del tuo design */
+    filter: drop-shadow(0 10px 20px rgba(0,0,0,0.05)); /* Aggiunge un'ombra leggera se l'immagine è trasparente */
 }
 
 /* =========================================
