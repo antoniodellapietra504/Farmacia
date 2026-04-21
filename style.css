@@ -116,6 +116,7 @@ header {
     
     /* TRUCCO: Crea un'unica ombra che segue sia la barra che la sporgenza centrale */
     filter: drop-shadow(0 4px 8px rgba(0,0,0,0.06));
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .navbar {
@@ -144,7 +145,7 @@ header {
     align-items: center;
     border-radius: 0 0 50px 50px; /* Angoli molto smussati per la fluidità */
     z-index: 10;
-    /* RIMOSSA box-shadow qui per evitare l'effetto "stacco" */
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .nav-icon-container img {
@@ -153,6 +154,7 @@ header {
     padding-top: 20px;
     padding-bottom: 00px; /* Sposta il logo leggermente più su nella conca */
     transition: transform 0.3s ease;
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .nav-icon-container:hover img {
@@ -170,6 +172,7 @@ header {
     gap: 10px;
     /* Aumentato il margine per la conca più larga */
     margin-right: 120px; 
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .logo a span {
@@ -184,7 +187,8 @@ header {
     gap: 30px;
     align-items: center;
     /* Aumentato per simmetria con il lato sinistro */
-    margin-left: 120px; 
+    margin-left: 120px;
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1); 
 }
 
 .nav-links a {
@@ -202,6 +206,41 @@ header {
     display: none; 
 }
 
+/* Quando l'utente scorrere, l'header può diventare leggermente più sottile se vuoi */
+header.scrolled {
+    height: 70px;
+}
+
+/* Il nome della farmacia sparisce gradualmente */
+header.scrolled .logo {
+    opacity: 0;
+    visibility: hidden;
+    transform: translateX(-20px); /* Leggero scivolamento a sinistra mentre sparisce */
+}
+
+/* La "Conca" si trasforma e si sposta a sinistra al posto del nome */
+header.scrolled .nav-icon-container {
+    left: 40px; /* Posizione del logo a sinistra */
+    transform: translateX(0); /* Rimuoviamo il centramento */
+    width: 80px;            /* Ridimensioniamo la conca */
+    height: 70px;           /* La rendiamo alta quanto l'header */
+    border-radius: 0;       /* Diventa piatta */
+}
+
+/* Il logo grafico rimpicciolisce per stare nel nuovo spazio */
+header.scrolled .nav-icon-container img {
+    width: 50px; 
+    padding-top: 0;
+}
+
+/* Eliminiamo i margini laterali per far sì che i link occupino lo spazio centrale ora vuoto */
+header.scrolled .logo a {
+    margin-right: 0;
+}
+
+header.scrolled .nav-links {
+    margin-left: 0;
+}
 /* =========================================
    5. HERO SECTION
    ========================================= */

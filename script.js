@@ -53,3 +53,15 @@ dots.forEach((dot, index) => {
         updateSlider(currentIndex);
     });
 });
+
+// Gestione dello scroll per l'animazione dell'header
+window.addEventListener('scroll', () => {
+    const header = document.querySelector('header');
+    
+    // Se lo scroll supera i 50 pixel, aggiunge la classe 'scrolled'
+    if (window.scrollY > 50) {
+        header.classList.add('scrolled');
+    } else {
+        header.classList.remove('scrolled');
+    }
+});
