@@ -247,12 +247,65 @@ header {
     color: var(--text-main);
 }
 
-.hub-image {
+/* --- NUOVA LOGICA SLIDER (Sostituisce .hub-image) --- */
+
+.hub-image-slider {
     flex: 1;
-    height: 400px;
-    background-color: #ffffff;
+    position: relative;
+    height: 450px; /* Altezza dello slider */
     border-radius: 24px;
+    overflow: hidden; /* Fondamentale: nasconde le foto fuori dal riquadro */
     box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+}
+
+.slider-wrapper {
+    display: flex;
+    height: 100%;
+    align-items: center;
+    transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.slide {
+    /* Ogni slide occupa l'80% della larghezza del contenitore */
+    /* Questo permette al 10% della slide precedente e successiva di intravedersi */
+    flex: 0 0 80%; 
+    height: 90%; /* Più bassa quando non è attiva */
+    margin: 0 10px; /* Spazio tra le foto */
+    object-fit: cover;
+    border-radius: 20px;
+    opacity: 0.4; /* Sbiadisce le foto laterali */
+    transform: scale(0.9); /* Rimpicciolisce le foto laterali */
+    transition: all 0.5s ease;
+}
+
+.slide.active {
+    opacity: 1;
+    transform: scale(1);
+    height: 100%; /* La foto centrale occupa tutta l'altezza */
+}
+
+.slider-dots {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 10px;
+    z-index: 5;
+}
+
+.dot {
+    width: 10px;
+    height: 10px;
+    background-color: rgba(255, 255, 255, 0.4);
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.dot.active {
+    background-color: #ffffff; /* Il puntino della foto attiva diventa bianco pieno */
+    transform: scale(1.2);
 }
 
 /* =========================================
