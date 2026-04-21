@@ -462,74 +462,117 @@ footer {
     }
 }
 
-/* Smartphone (Sotto i 768px) */
+/* =========================================
+   9. RESPONSIVITÀ - VERSIONE MOBILE
+   ========================================= */
 @media (max-width: 768px) {
-    /* 1. Reset e Testata */
-    .logo { display: none; }
-
+    /* Navbar: spazio tra nome (sinistra) e hamburger (destra) */
     .navbar {
-        display: flex;
-        justify-content: flex-end; 
+        display: flex !important;
+        justify-content: space-between !important;
         align-items: center;
-        height: 70px; /* Altezza fissa più pulita */
-        width: 100%;
+        height: 70px;
         padding: 0 20px;
-        position: relative;
-        background-color: white;
-        z-index: 100;
+        z-index: 10001;
     }
 
-    /* 2. Menu Toggle (Hamburger) */
-    .menu-toggle {
+    /* 1. SCRITTA LOGO: Identica alla versione Desktop */
+    .logo {
+        display: block !important; 
+        opacity: 1;
+        transition: opacity 0.3s ease;
+        margin: 0 !important;
+    }
+
+    .logo a {
+        font-family: var(--font-heading) !important;
+        font-size: 1.3rem !important; /* Leggermente ridotto per mobile */
+        font-weight: 700 !important;
+        color: var(--primary-color) !important;
+        text-transform: uppercase !important; /* Tutto maiuscolo come desktop */
+        letter-spacing: 1px !important;
         display: flex;
+        gap: 8px;
+    }
+
+    .logo a span {
+        font-weight: 300 !important; /* Sottile come desktop */
+        color: var(--text-main) !important;
+    }
+
+    /* Nasconde la scritta quando apri il menù */
+    .navbar.nav-active .logo {
+        opacity: 0;
+        pointer-events: none;
+    }
+
+    /* 2. CONCA COL LOGO: Appare a DESTRA quando il menù è aperto */
+    .nav-icon-container {
+        display: none; /* Nascosta normalmente */
+        position: absolute;
+        left: auto;
+        right: 70px; /* Di fianco all'hamburger */
+        top: 0;
+        transform: none;
+        width: 65px;
+        height: 75px;
+        background: white;
+        border-radius: 0 0 20px 20px;
+        z-index: 10002;
+        justify-content: center;
+        align-items: center;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    }
+
+    .navbar.nav-active .nav-icon-container {
+        display: flex; /* Appare al click */
+    }
+
+    .nav-icon-container img {
+        width: 45px !important;
+        padding-top: 10px;
+    }
+
+    /* 3. HAMBURGER: Risolto il problema dell'invisibilità */
+    .menu-toggle {
+        display: flex !important; /* Forza la comparsa */
         flex-direction: column;
         justify-content: center;
         align-items: center;
         width: 44px;
         height: 44px;
+        z-index: 10005; /* Sopra l'overlay bianco */
         cursor: pointer;
-        z-index: 9999; /* DEVE stare sopra tutto per la X */
         background: transparent;
         border: none;
     }
 
     .menu-toggle .bar {
-        display: block;
-        width: 28px;
-        height: 3px;
-        margin: 3px 0;
-        background-color: #0f172a;
-        transition: 0.3s;
+        display: block !important;
+        width: 28px !important;
+        height: 3px !important;
+        margin: 3px 0 !important;
+        background-color: #0f172a !important; /* Colore scuro visibile */
         border-radius: 5px;
+        transition: 0.3s;
     }
 
-    /* Animazione a X */
-    #mobile-menu.is-active .bar:nth-child(2) { opacity: 0; transform: translateX(-10px); }
-    #mobile-menu.is-active .bar:nth-child(1) { transform: translateY(9px) rotate(45deg); }
-    #mobile-menu.is-active .bar:nth-child(3) { transform: translateY(-9px) rotate(-45deg); }
-
-    /* 3. MENU NAVIGAZIONE (L'OVERLAY CHE NON DEVE SBAGLIARE) */
+    /* 4. OVERLAY MENU: Copre tutto lo schermo */
     .nav-links {
-        position: fixed !important; /* Esce da ogni contenitore */
+        position: fixed !important;
         top: 0 !important;
         left: 0 !important;
-        right: 0 !important;
-        bottom: 0 !important;
-        width: 100vw !important; /* Tutta la larghezza schermo */
-        height: 100vh !important; /* Tutta l'altezza schermo */
-        background-color: #ffffff !important;
-        
+        width: 100vw !important;
+        height: 100vh !important;
+        background-color: white !important;
         display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: center;
-        
-        /* Lo nascondiamo del tutto */
-        transform: translateX(-100%); 
+        transform: translateX(-100%);
         visibility: hidden;
         transition: transform 0.4s cubic-bezier(0.77,0.2,0.05,1), visibility 0.4s;
-        
-        z-index: 9000; /* Sotto l'hamburger ma sopra il resto */
+        z-index: 9000;
         margin: 0 !important;
         padding: 0 !important;
     }
@@ -539,70 +582,16 @@ footer {
         visibility: visible;
     }
 
-    /* 4. STILE SCRITTE (Basta scritte "di merda") */
     .nav-links li {
         list-style: none;
-        margin: 15px 0;
-        text-align: center;
-        width: 100%;
-        opacity: 0;
-        transform: translateY(20px);
-        transition: 0.4s;
+        margin: 20px 0;
     }
-
-    .nav-links.active li {
-        opacity: 1;
-        transform: translateY(0);
-    }
-
-    /* Ritardo per far apparire i link uno dopo l'altro */
-    .nav-links li:nth-child(1) { transition-delay: 0.1s; }
-    .nav-links li:nth-child(2) { transition-delay: 0.2s; }
-    .nav-links li:nth-child(3) { transition-delay: 0.3s; }
-    .nav-links li:nth-child(4) { transition-delay: 0.4s; }
 
     .nav-links li a {
-        text-decoration: none;
-        color: #0f172a; /* Antracite brand */
-        font-family: 'Poppins', sans-serif;
-        font-size: 1.6rem; /* Grandi ma leggibili */
+        font-family: var(--font-heading);
+        font-size: 1.8rem;
         font-weight: 700;
+        color: #0f172a;
         text-transform: uppercase;
-        letter-spacing: 2px;
-        display: inline-block;
-        padding: 10px 20px;
-    }
-
-    /* Bottone Contatti nel Menu */
-    .nav-links li a.btn-primary {
-        background-color: #4BA46F;
-        color: white;
-        border-radius: 50px;
-        padding: 15px 40px;
-        margin-top: 10px;
-        font-size: 1.2rem;
-        box-shadow: 0 4px 15px rgba(75, 164, 111, 0.3);
-    }
-
-    /* 5. Icona Centrale (Conca) */
-    .nav-icon-container {
-        width: 100px;
-        height: 80px;
-        position: absolute;
-        left: 50%;
-        top: 0;
-        transform: translateX(-50%);
-        background: white;
-        border-radius: 0 0 30px 30px;
-        z-index: 150; /* Deve stare sopra la navbar ma sotto il menu aperto */
-        display: flex;
-        justify-content: center;
-        box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-    }
-
-    .nav-icon-container img {
-        width: 60px;
-        height: auto;
-        padding-top: 10px;
     }
 }

@@ -1,23 +1,25 @@
 const menu = document.querySelector('#mobile-menu');
 const menuLinks = document.querySelector('.nav-links');
+const navbar = document.querySelector('.navbar'); // Seleziona la navbar
 
-//Toggle
+// Toggle Menu
 menu.addEventListener('click', function() {
     menu.classList.toggle('is-active');
     menuLinks.classList.toggle('active');
+    navbar.classList.toggle('nav-active'); // Aggiunge lo stato alla navbar per cambiare logo/scritta
     
-    // Blocca o sblocca lo scroll del body
     if (menuLinks.classList.contains('active')) {
         document.body.style.overflow = 'hidden';
     } else {
         document.body.style.overflow = 'auto';
     }
-})
+});
 
-// Chiude il menu quando si clicca su un link (opzionale ma consigliato)
+// Chiude il menu quando si clicca su un link
 document.querySelectorAll('.nav-links a').forEach(n => n.addEventListener('click', () => {
     menu.classList.remove('is-active');
     menuLinks.classList.remove('active');
+    navbar.classList.remove('nav-active');
     document.body.style.overflow = 'auto';
 }));
 
