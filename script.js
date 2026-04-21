@@ -1,16 +1,24 @@
 const menu = document.querySelector('#mobile-menu');
 const menuLinks = document.querySelector('.nav-links');
 
-// Toggle del menu mobile
+//Toggle
 menu.addEventListener('click', function() {
     menu.classList.toggle('is-active');
     menuLinks.classList.toggle('active');
-});
+    
+    // Blocca o sblocca lo scroll del body
+    if (menuLinks.classList.contains('active')) {
+        document.body.style.overflow = 'hidden';
+    } else {
+        document.body.style.overflow = 'auto';
+    }
+})
 
 // Chiude il menu quando si clicca su un link (opzionale ma consigliato)
 document.querySelectorAll('.nav-links a').forEach(n => n.addEventListener('click', () => {
     menu.classList.remove('is-active');
     menuLinks.classList.remove('active');
+    document.body.style.overflow = 'auto';
 }));
 
 // Logica per lo slider "Chi Siamo"

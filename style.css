@@ -172,16 +172,25 @@ header {
     padding: 120px 5% 100px; 
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: center; /* Cambiato da space-between a center */
     max-width: 1200px;
     margin: 0 auto;
     min-height: 90vh;
+    text-align: center;      /* Centra il testo per i contenitori figli */
 }
 
 .hero-content {
     flex: 1;
-    max-width: 650px;
-    text-align: left;
+    max-width: 800px;        /* Aumentato un po' per una migliore leggibilità senza immagine */
+    text-align: center;      /* Forza l'allineamento centrale del testo */
+    margin: 0 auto;          /* Centra il blocco orizzontalmente */
+}
+
+.hero p {
+    font-size: 1.15rem;
+    color: var(--text-light);
+    margin: 0 auto 40px;     /* Aggiunto auto ai lati per centrare il paragrafo */
+    max-width: 600px;
 }
 
 .hero h1 {
@@ -228,13 +237,20 @@ header {
    6. CHI SIAMO (Wellness Hub)
    ========================================= */
 .wellness-hub {
-    background-color: var(--bg-secondary); /* Sfondo grigio chiaro */
-    padding: 100px 5%;
+    background-color: var(--bg-secondary); /* Il rettangolo grigio */
+    width: 100%;
+    padding: 100px 0;        /* Rimuoviamo il padding laterale da qui */
+    max-width: none;         /* Rimuoviamo il limite dei 1200px */
+    margin: 0;
+}
+
+.hub-container {
+    max-width: 1200px;       /* Mantiene l'allineamento con la Hero e i Servizi */
+    margin: 0 auto;          /* Centra il contenuto nella fascia grigia */
+    padding: 0 5%;           /* Margine di sicurezza interno */
     display: flex;
     align-items: center;
     gap: 80px;
-    max-width: 1200px;
-    margin: 0 auto;
 }
 
 .hub-content {
@@ -384,21 +400,28 @@ footer {
 
 /* Tablet e schermi medi (Sotto i 1024px) */
 @media (max-width: 1024px) {
-    .hero, .wellness-hub {
-        flex-direction: column; /* Impila testo e immagine */
+    /* 1. Usiamo .hub-container invece di .wellness-hub */
+    .hero, .hub-container {
+        flex-direction: column; 
         text-align: center;
-        padding-top: 140px;
+        padding-top: 80px; /* Ridotto perché senza logo la hero è più leggera */
         gap: 40px;
     }
 
-    .hero-image, .hub-image {
+    /* 2. .hero-image non esiste più, aggiorniamo il nome dello slider */
+    .hub-image-slider {
         width: 100%;
         margin-left: 0;
-        height: 300px; /* Riduce l'altezza dei placeholder */
+        height: 350px; /* Altezza ottimizzata per tablet */
     }
 
+    /* 3. Il testo della hero può essere leggermente più piccolo */
     .hero h1 {
-        font-size: 2.8rem;
+        font-size: 2.5rem;
+    }
+    
+    .hero-content {
+        max-width: 100%;
     }
 }
 
@@ -421,16 +444,18 @@ footer {
 
     .nav-links {
         position: fixed;
-        top: 70px;
-        left: -100%; /* Nasconde il menu a sinistra */
+        top: 70px; /* Inizia subito sotto l'header */
+        left: -100%; /* Nascosto a sinistra */
         flex-direction: column;
-        background-color: white;
+        background-color: white; /* Colore pieno per coprire tutto */
         width: 100%;
+        height: calc(100vh - 70px); /* Occupa tutto il resto dell'altezza dello schermo */
+        justify-content: center;    /* Centra i link verticalmente per un look più pulito */
         text-align: center;
         transition: 0.4s ease-in-out;
-        box-shadow: 0 10px 20px rgba(0,0,0,0.05);
-        padding: 40px 0;
         display: flex;
+        z-index: 1000;
+        overflow-y: auto; /* Permette lo scroll se il menù è molto lungo */
     }
 
     .nav-links.active {
