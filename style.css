@@ -260,28 +260,16 @@ header {
 
 .slider-wrapper {
     display: flex;
+    width: 300%; /* Spazio totale per 3 foto (100% x 3) */
     height: 100%;
-    align-items: center;
-    transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    /* Questo permette il movimento fluido quando il JS cambia il transform */
+    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .slide {
-    /* Ogni slide occupa l'80% della larghezza del contenitore */
-    /* Questo permette al 10% della slide precedente e successiva di intravedersi */
-    flex: 0 0 80%; 
-    height: 90%; /* Più bassa quando non è attiva */
-    margin: 0 10px; /* Spazio tra le foto */
-    object-fit: cover;
-    border-radius: 20px;
-    opacity: 0.4; /* Sbiadisce le foto laterali */
-    transform: scale(0.9); /* Rimpicciolisce le foto laterali */
-    transition: all 0.5s ease;
-}
-
-.slide.active {
-    opacity: 1;
-    transform: scale(1);
-    height: 100%; /* La foto centrale occupa tutta l'altezza */
+    width: 33.333%; /* Ogni foto occupa un terzo del wrapper */
+    height: 100%;
+    object-fit: cover; /* Evita che le foto si deformino */
 }
 
 .slider-dots {
