@@ -107,16 +107,19 @@ header {
     position: fixed;
     top: 0;
     width: 100%;
-    background-color: rgba(255, 255, 255, 0.98);
-    backdrop-filter: blur(10px);
+    background-color: white; /* Colore solido per una fusione perfetta senza aloni */
     z-index: 1000;
-    border-bottom: 1px solid #f1f5f9;
-    height: 70px; /* Altezza fissa e sottile */
+    height: 70px;
     display: flex;
     align-items: center;
+    border-bottom: none; /* Rimosso per eliminare ogni linea di interruzione */
+    
+    /* TRUCCO: Crea un'unica ombra che segue sia la barra che la sporgenza centrale */
+    filter: drop-shadow(0 4px 8px rgba(0,0,0,0.06));
 }
 
 .navbar {
+    position: relative;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -124,22 +127,53 @@ header {
     max-width: 1300px;
     margin: 0 auto;
     padding: 0 20px;
+    height: 100%;
+}
+
+/* La "Conca" centrale: ora è fusa visivamente con l'header */
+.nav-icon-container {
+    position: absolute;
+    left: 50%;
+    top: 0;
+    transform: translateX(-50%);
+    background-color: white; /* Deve essere identico al background dell'header */
+    width: 140px;            /* Allargata per un look più armonioso */
+    height: 110px;           /* Lunghezza della sporgenza */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 0 0 40px 40px; /* Angoli molto smussati per la fluidità */
+    z-index: 10;
+    /* RIMOSSA box-shadow qui per evitare l'effetto "stacco" */
+}
+
+.nav-icon-container img {
+    width: 95px; /* Logo ingrandito come richiesto */
+    height: auto;
+    padding-bottom: 10px; /* Sposta il logo leggermente più su nella conca */
+    transition: transform 0.3s ease;
+}
+
+.nav-icon-container:hover img {
+    transform: scale(1.05);
 }
 
 .logo a {
-    font-family: var(--font-heading); /* Usa Poppins */
+    font-family: var(--font-heading);
     font-size: 1.8rem;
     font-weight: 700;
-    color: var(--primary-color); /* Il tuo verde #22c55e */
+    color: var(--primary-color);
     letter-spacing: 1px;
-    text-transform: uppercase; /* Rende il brand più autorevole */
+    text-transform: uppercase;
     display: flex;
     gap: 10px;
+    /* Aumentato il margine per la conca più larga */
+    margin-right: 100px; 
 }
 
 .logo a span {
-    font-weight: 300; /* Rende "dei Tigli" un po' più sottile per stile */
-    color: var(--text-main); /* Colore antracite per staccare */
+    font-weight: 300;
+    color: var(--text-main);
     letter-spacing: 2px;
 }
 
@@ -148,6 +182,8 @@ header {
     list-style: none;
     gap: 30px;
     align-items: center;
+    /* Aumentato per simmetria con il lato sinistro */
+    margin-left: 100px; 
 }
 
 .nav-links a {
@@ -480,5 +516,13 @@ footer {
 
     #mobile-menu.is-active .bar:nth-child(3) {
         transform: translateY(-8px) rotate(-45deg);
+    }
+
+    .nav-icon-container {
+        width: 80px;
+        height: 80px;
+    }
+    .nav-icon-container img {
+        width: 45px;
     }
 }
