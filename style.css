@@ -107,81 +107,81 @@ header {
     position: fixed;
     top: 0;
     width: 100%;
-    background-color: white; /* Colore solido per una fusione perfetta senza aloni */
+    background-color: white; 
     z-index: 1000;
     height: 70px;
     display: flex;
     align-items: center;
-    border-bottom: none; /* Rimosso per eliminare ogni linea di interruzione */
+    /* 1. Il segreto: Questa ombra avvolge sia la barra che la conca come se fossero un pezzo unico */
+    filter: drop-shadow(0 4px 6px rgba(0,0,0,0.07)); 
     
-    /* TRUCCO: Crea un'unica ombra che segue sia la barra che la sporgenza centrale */
-    filter: drop-shadow(0 4px 8px rgba(0,0,0,0.06));
-    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    border: none;
+    transition: all 0.3s ease;
 }
 
 .navbar {
-    position: relative;
     display: flex;
-    justify-content: space-between;
+    justify-content: space-between;/* Spinge gli elementi ai lati opposti */
     align-items: center;
     width: 100%;
-    max-width: 1300px;
+    max-width: 100%;
     margin: 0 auto;
-    padding: 0 20px;
+    padding: 0 10px;
     height: 100%;
 }
 
-/* La "Conca" centrale: ora è fusa visivamente con l'header */
+/* NUOVO: Contenitore che tiene uniti la conca e il testo a sinistra */
+.nav-brand {
+    display: flex;
+    align-items: center;
+    height: 100%;
+}
+
+/* La Conca: ora è spostata a sinistra e "appesa" all'header */
 .nav-icon-container {
-    position: absolute;
-    left: 50%;
-    top: 0;
-    transform: translateX(-50%);
-    background-color: white; /* Deve essere identico al background dell'header */
-    width: 180px;            /* Allargata per un look più armonioso */
-    height: 130px;           /* Lunghezza della sporgenza */
+    position: relative; /* Rimosso absolute e centramento */
+    align-self: flex-start; /* Fa partire la conca dal tetto dell'header */
+    background-color: white; 
+    width: 150px;            
+    height: 110px;           /* Sporge dall'header (che è 70px) */
     display: flex;
     justify-content: center;
     align-items: center;
-    border-radius: 0 0 50px 50px; /* Angoli molto smussati per la fluidità */
+    border-radius: 0 0 40px 40px; 
+    box-shadow: none !important; 
+    
+    margin-right: 20px;
     z-index: 10;
-    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    margin-left: 0;
 }
 
 .nav-icon-container img {
-    width: 200px; /* Logo ingrandito come richiesto */
+    width: 200px; /* Dimensione logo adattata */
     height: auto;
-    padding-top: 20px;
-    padding-bottom: 00px; /* Sposta il logo leggermente più su nella conca */
-    transition: transform 0.3s ease;
-    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    padding-top: 15px; 
 }
 
-.nav-icon-container:hover img {
-    transform: scale(1.05);
+.nav-icon-container:hover {
+    transform: scale(1.05); /* Leggero ingrandimento al passaggio del mouse */
 }
 
-/* Stato normale del contenitore logo (Scroll in cima) */
+/* Testo "Farmacia dei Tigli" */
 .logo {
-    opacity: 1;
-    visibility: visible;
-    transform: translateX(0);
-    /* Ritardo di 0.3s quando si torna in cima per far prima spostare la conca */
-    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1) 0.2s;
+    margin: 0; /* Reset vecchi margini */
+    border: none;
 }
 
 .logo a {
     font-family: var(--font-heading);
-    font-size: 1.8rem;
+    font-size: 1.6rem; /* Ridotto leggermente per stare in linea */
     font-weight: 700;
     color: var(--primary-color);
     letter-spacing: 1px;
     text-transform: uppercase;
     display: flex;
-    gap: 10px;
-    /* Aumentato il margine per la conca più larga */
-    margin-right: 120px; 
-    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    gap: 8px;
+    margin-right: 0; /* Reset */
+    white-space: nowrap; /* Impedisce al testo di andare a capo */
 }
 
 .logo a span {
@@ -190,16 +190,13 @@ header {
     letter-spacing: 2px;
 }
 
+/* Menu di navigazione */
 .nav-links {
     display: flex;
     list-style: none;
     gap: 30px;
     align-items: center;
-    /* Aumentato per simmetria con il lato sinistro */
-    margin-left: 120px;
-    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1); 
-    position: relative;
-    right: 0;
+    margin-left: 600px;/*Qesto è il trucco: spinge tutti i link verso destra! */
 }
 
 .nav-links a {
@@ -217,41 +214,11 @@ header {
     display: none; 
 }
 
-/* Quando l'utente scorrere, l'header può diventare leggermente più sottile se vuoi*/
-header.scrolled {
-    height: 70px;
-} 
-
-/* Il nome della farmacia sparisce gradualmente */
-header.scrolled .logo {
-    opacity: 0;
-    visibility: hidden;
-    transform: translateX(-20px); /* Leggero scivolamento a sinistra mentre sparisce*/ 
-    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1) 0s;
-} 
-
-/* La "Conca" si trasforma e si sposta a sinistra al posto del nome */
-header.scrolled .nav-icon-container {
-    left: -60px; /* Posizione del logo a sinistra */
-    transform: translateX(0); /* Rimuoviamo il centramento */
-}
-
-
-/* Eliminiamo i margini laterali per far sì che i link occupino lo spazio centrale ora vuoto */
-header.scrolled .logo a {
-    margin-right: 0;
-}
-
-header.scrolled .nav-links {
-    margin-left: 0;
-    right: 32%;
-}
-
 /* =========================================
    5. HERO SECTION
    ========================================= */
 .hero {
-    padding: 120px 5% 100px; 
+    padding: 220px 5% 100px; 
     display: flex;
     align-items: center;
     justify-content: center; /* Cambiato da space-between a center */
@@ -510,125 +477,75 @@ footer {
 /* =========================================
    9. RESPONSIVITÀ - VERSIONE MOBILE
    ========================================= */
-@media (max-width: 768px) {
-    /* Navbar: Blocca la larghezza ed evita spostamenti */
+@media (max-width: 1024px) and (min-width: 769px) {
     .navbar {
-        display: flex !important;
-        justify-content: space-between !important;
+        padding: 0 15px; /* Riduciamo i padding laterali */
+        display: flex;
+        justify-content: space-between;
         align-items: center;
-        height: 70px;
-        padding: 0 20px;
-        width: 100% !important;
-        max-width: 100% !important;
-        position: relative;
-        z-index: 10001;
-        overflow: hidden; /* Protezione extra per la navbar */
     }
 
-    /* 1. SCRITTA LOGO: Identica alla versione Desktop */
     .logo {
-        display: block !important; 
-        opacity: 1;
-        transition: opacity 0.3s ease;
+        font-size: 1.1rem; /* Riduciamo leggermente il font del nome */
     }
 
-    .logo a {
-        font-family: var(--font-heading) !important;
-        font-size: 1.1rem !important; 
-        font-weight: 700 !important;
-        color: var(--primary-color) !important;
-        text-transform: uppercase !important; 
-        letter-spacing: 1px !important;
-        display: flex;
-        gap: 5px;
+    .nav-links {
+        display: none; /* Riduciamo lo spazio tra i link (Home, Servizi, ecc.) */
     }
 
-    .logo a span {
-        font-weight: 300 !important;
-        color: var(--text-main) !important;
-    }
-
-    /* Switch: scompare la scritta all'apertura */
-    .navbar.nav-active .logo {
-        opacity: 0;
-        pointer-events: none;
-    }
-
-    /* 2. CONCA COL LOGO: Compare a DESTRA */
-    .nav-icon-container {
-        display: none; 
-        position: absolute;
-        left: auto;
-        right: 70px; 
-        top: 0;
-        width: 65px;
-        height: 75px;
-        background: white;
-        border-radius: 0 0 20px 20px;
-        z-index: 10002;
-        justify-content: center;
-        align-items: center;
-        box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-    }
-
-    .navbar.nav-active .nav-icon-container {
-        display: flex; 
-    }
-
-    /* 3. HAMBURGER: Barre forzate e visibili */
-    .menu-toggle {
+    /* Quando il menu riceve la classe 'active' da JavaScript, si mostra in verticale */
+    .nav-links.active {
         display: flex !important;
         flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        width: 44px;
-        height: 44px;
-        z-index: 10005;
-        cursor: pointer;
+        position: absolute;
+        top: 100px; /* Aggiusta questo valore in base all'altezza della tua navbar */
+        left: 0;
+        width: 100%;
+        background-color: #ffffff; /* Colore di sfondo del menu a tendina */
+        padding: 20px 0;
+        box-shadow: 0 5px 10px rgba(0,0,0,0.1); /* Piccola ombra per staccarlo dal fondo */
+        text-align: center;
+        z-index: 999;
     }
 
-    .menu-toggle .bar {
-        display: block !important;
-        width: 25px !important;
-        height: 3px !important;
-        margin: 3px 0 !important;
-        background-color: #0f172a !important; 
-        transition: 0.3s;
+    /* Opzionale: rimette in ordine i link quando sono a tendina */
+    .nav-links.active li {
+        margin: 10px 0;
     }
 
-    /* Animazione X */
-    #mobile-menu.is-active .bar:nth-child(2) { opacity: 0; }
-    #mobile-menu.is-active .bar:nth-child(1) { transform: translateY(9px) rotate(45deg); }
-    #mobile-menu.is-active .bar:nth-child(3) { transform: translateY(-9px) rotate(-45deg); }
+    .nav-icon-container {
+        width: 150px; /* Riduciamo leggermente la dimensione della conca */
+        height: 100px;
+    }
 
-    /* 4. OVERLAY MENU: Zero scroll orizzontale */
-    .nav-links {
-        position: fixed !important;
-        top: 0 !important;
-        left: 0 !important;
-        width: 100% !important; /* Usiamo 100% invece di 100vw per evitare overflow */
-        height: 100vh !important;
-        background-color: white !important;
-        display: flex;
+    .nav-icon-container img {
+        width: 160px; /* Adattiamo il logo interno */
+    }
+    
+    .hero{
+        padding-top: 150px !important; /* Aumenta questo valore finché la scritta non è libera */
+        text-align: center;
+    }
+
+    /* 1. Assicurati che l'hamburger sia visibile e sopra tutto */
+    .menu-toggle {
+        display: flex !important; /* Forza la visibilità */
         flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        transform: translateX(-100%);
-        visibility: hidden;
-        transition: transform 0.4s cubic-bezier(0.77,0.2,0.05,1), visibility 0.4s;
-        z-index: 9000;
+        justify-content: space-between;
+        width: 30px;
+        height: 21px;
+        cursor: pointer;
+        z-index: 1001; /* Deve stare sopra l'header */
+        position: relative;
     }
 
-    .nav-links.active {
-        transform: translateX(0);
-        visibility: visible;
+    /* 2. Assicurati che le barrette siano di un colore visibile (es. Verde o Grigio scuro) */
+    .menu-toggle .bar {
+        height: 3px;
+        width: 100%;
+        background-color: #2d5a27; /* Usa il colore verde della farmacia o nero */
+        border-radius: 10px;
+        transition: all 0.3s ease;
     }
 
-    /* Sezioni Hero e Hub: Prevenzione overflow */
-    .hero, .wellness-hub, .hub-container {
-        width: 100% !important;
-        overflow: hidden !important;
-        max-width: 100vw !important;
-    }
 }
-

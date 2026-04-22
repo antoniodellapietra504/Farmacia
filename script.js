@@ -55,7 +55,7 @@ dots.forEach((dot, index) => {
 });
 
 // Gestione dello scroll per l'animazione dell'header
-window.addEventListener('scroll', () => {
+/*window.addEventListener('scroll', () => {
     const header = document.querySelector('header');
     
     // Se lo scroll supera i 50 pixel, aggiunge la classe 'scrolled'
@@ -64,4 +64,4 @@ window.addEventListener('scroll', () => {
     } else {
         header.classList.remove('scrolled');
     }
-});
+});*/
