@@ -161,6 +161,15 @@ header {
     transform: scale(1.05);
 }
 
+/* Stato normale del contenitore logo (Scroll in cima) */
+.logo {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(0);
+    /* Ritardo di 0.3s quando si torna in cima per far prima spostare la conca */
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1) 0.2s;
+}
+
 .logo a {
     font-family: var(--font-heading);
     font-size: 1.8rem;
@@ -206,32 +215,25 @@ header {
     display: none; 
 }
 
-/* Quando l'utente scorrere, l'header può diventare leggermente più sottile se vuoi */
+/* Quando l'utente scorrere, l'header può diventare leggermente più sottile se vuoi*/
 header.scrolled {
     height: 70px;
-}
+} 
 
 /* Il nome della farmacia sparisce gradualmente */
 header.scrolled .logo {
     opacity: 0;
     visibility: hidden;
-    transform: translateX(-20px); /* Leggero scivolamento a sinistra mentre sparisce */
-}
+    transform: translateX(-20px); /* Leggero scivolamento a sinistra mentre sparisce*/ 
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1) 0s;
+} 
 
 /* La "Conca" si trasforma e si sposta a sinistra al posto del nome */
 header.scrolled .nav-icon-container {
-    left: 40px; /* Posizione del logo a sinistra */
+    left: -60px; /* Posizione del logo a sinistra */
     transform: translateX(0); /* Rimuoviamo il centramento */
-    width: 80px;            /* Ridimensioniamo la conca */
-    height: 70px;           /* La rendiamo alta quanto l'header */
-    border-radius: 0;       /* Diventa piatta */
 }
 
-/* Il logo grafico rimpicciolisce per stare nel nuovo spazio */
-header.scrolled .nav-icon-container img {
-    width: 50px; 
-    padding-top: 0;
-}
 
 /* Eliminiamo i margini laterali per far sì che i link occupino lo spazio centrale ora vuoto */
 header.scrolled .logo a {
