@@ -49,6 +49,21 @@ a {
     color: inherit;
 }
 
+/* Rimuove l'effetto "rettangolo blu" al click su link e bottoni */
+a, button, .menu-toggle {
+    /* Rimuove l'evidenziazione azzurra del tap su smartphone (iOS e Android) */
+    -webkit-tap-highlight-color: transparent; 
+    
+    /* Rimuove il bordo blu di focus quando si clicca (Desktop e Android) */
+    outline: none; 
+}
+
+/* Opzionale: se vuoi mantenere l'accessibilità per chi naviga con la tastiera (Tab) */
+a:focus-visible, button:focus-visible, .menu-toggle:focus-visible {
+    outline: 2px solid var(--primary-color);
+    outline-offset: 4px;
+}
+
 /* =========================================
    3. COMPONENTI (Bottoni)
    ========================================= */
@@ -444,37 +459,6 @@ footer {
 }
 
 /* =========================================
-   9. RESPONSIVITÀ (Media Queries)
-   ========================================= */
-
-/* Tablet e schermi medi (Sotto i 1024px) */
-@media (max-width: 1024px) {
-    /* 1. Usiamo .hub-container invece di .wellness-hub */
-    .hero, .hub-container {
-        flex-direction: column; 
-        text-align: center;
-        padding-top: 80px; /* Ridotto perché senza logo la hero è più leggera */
-        gap: 40px;
-    }
-
-    /* 2. .hero-image non esiste più, aggiorniamo il nome dello slider */
-    .hub-image-slider {
-        width: 100%;
-        margin-left: 0;
-        height: 350px; /* Altezza ottimizzata per tablet */
-    }
-
-    /* 3. Il testo della hero può essere leggermente più piccolo */
-    .hero h1 {
-        font-size: 2.5rem;
-    }
-    
-    .hero-content {
-        max-width: 100%;
-    }
-}
-
-/* =========================================
    9. RESPONSIVITÀ - VERSIONE MOBILE
    ========================================= */
 @media (max-width: 1024px) and (min-width: 769px) {
@@ -493,45 +477,76 @@ footer {
 
     .nav-brand {
         position: relative;
-        z-index: 1100; /* Valore più alto del menu (che è 1000) */
+        z-index: 1002; /* Valore più alto del menu (che è 1000) */
     }
 
+    /* =========================================
+       MENU A SARACINESCA (Solo Mobile/Tablet)
+       ========================================= */
+
+    /* 1. Il menu è sempre "acceso", ma lo nascondiamo in alto fuori dallo schermo */
     .nav-links {
-        display: none; /* Riduciamo lo spazio tra i link (Home, Servizi, ecc.) */
-    }
-
-    /* Quando il menu riceve la classe 'active' da JavaScript, si mostra in verticale */
-    .nav-links.active {
-        display: flex !important;
+        display: flex; /* Addio display: none! */
         flex-direction: column;
-        justify-content: center; /* Centra i link verticalmente */
-        align-items: center;     /* Centra i link orizzontalmente */
-        position: fixed;         /* Lo fissa rispetto alla finestra del dispositivo */
-        top: 0;                  /* Copre partendo dal primissimo pixel in alto */
+        justify-content: flex-start;
+        align-items: center;
+        position: absolute;
+        top: 100%;
         left: 0;
-        width: 100vw;            /* 100% della larghezza dello schermo */
-        height: 100vh;           /* 100% dell'altezza dello schermo */
-        background-color: var(--bg-color); /* Usa il bianco del tuo tema */
-        z-index: 1000;            /* Sta sotto alla X (che ha 1001) */
-        margin-left: 0 !important; /* Mantiene la correzione di prima */
-        padding-top: 150px;
+        width: 100%;
+        background-color: var(--bg-color);
+        z-index: 1000;
+        margin-left: 0 !important; /* Azzera il desktop */
+        max-height: 0;          /* Chiuso: altezza zero */
+        overflow: hidden;       /* Taglia tutto ciò che sta fuori */
+        padding: 0;             /* Nessuno spazio quando è chiuso */
+        
+        /* Animazione morbida che fa crescere l'altezza in basso */
+        transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1), padding 0.5s ease;
     }
 
-    /* Opzionale: rimette in ordine i link quando sono a tendina */
-    .nav-links.active li {
+    /* 2. Quando clicchi l'hamburger, la saracinesca scende a coordinata 0 */
+    .nav-links.active {
+        max-height: 100vh;      /* Si apre fino a riempire lo schermo */
+        padding-top: 50px;      /* Dà spazio ai testi dall'alto */
+        padding-bottom: 50px;
+    }
+
+    /* 3. Stile dei link */
+    .nav-links li {
         margin: 20px 0;
+        list-style: none;
+        opacity: 0; /* Invisibili finché non si apre */
+        transform: translateY(-10px); /* Leggermente sollevati */
+        transition: opacity 0.3s ease, transform 0.3s ease;
     }
 
-    .nav-links.active li a {
-        color: var(--text-main); /* Il tuo verde! Così non avrai testo bianco su sfondo bianco */
+    /* Quando il menu riceve "active", i testi diventano visibili con un leggero ritardo */
+    .nav-links.active li {
+        opacity: 1;
+        transform: translateY(0);
+        transition-delay: 0.2s; /* Aspetta che la saracinesca sia scesa un po' */
+    }
+
+    .nav-links li a {
+        color: var(--text-light);
         font-size: 1.8rem;
         font-weight: 600;
-        display: inline-block;
-        transition: color 0.3s ease;
+        text-decoration: none;
+        display: inline-block; 
+        transition: all 0.3s ease;
     }
 
-    .nav-links.active li a:hover {
+    .nav-links li a:hover {
         color: var(--primary-color);
+        transform: translateY(-5px);
+    }
+
+    /* Effetto "Pressione" (Mentre il dito/mouse sta cliccando) */
+    .nav-links li a:active {
+        transform: scale(0.95) translateY(0); /* Si rimpicciolisce del 5% e torna giù, effetto molla! */
+        opacity: 1; /* Leggero calo di opacità per confermare il tocco */
+        transition: all 0.2s ease; /* ATTENZIONE: Questa transizione deve essere velocissima (0.1s) per dare l'idea del click immediato */
     }
 
     .nav-icon-container {
@@ -556,7 +571,7 @@ footer {
         width: 30px;
         height: 21px;
         cursor: pointer;
-        z-index: 1100; /* Deve stare sopra l'header */
+        z-index: 1002; /* Deve stare sopra l'header */
         position: relative;
     }
 
@@ -586,6 +601,30 @@ footer {
     /* La terza barra sale e ruota in senso opposto (-45 gradi) */
     .menu-toggle.is-active .bar:nth-child(3) {
         transform: translateY(-9px) rotate(-45deg);
+    }
+
+    /* 1. Usiamo .hub-container invece di .wellness-hub */
+    .hero, .hub-container {
+        flex-direction: column; 
+        text-align: center;
+        padding-top: 80px; /* Ridotto perché senza logo la hero è più leggera */
+        gap: 40px;
+    }
+
+    /* 2. .hero-image non esiste più, aggiorniamo il nome dello slider */
+    .hub-image-slider {
+        width: 100%;
+        margin-left: 0;
+        height: 350px; /* Altezza ottimizzata per tablet */
+    }
+
+    /* 3. Il testo della hero può essere leggermente più piccolo */
+    .hero h1 {
+        font-size: 2.5rem;
+    }
+    
+    .hero-content {
+        max-width: 100%;
     }
 
 }
