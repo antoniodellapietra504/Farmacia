@@ -484,10 +484,16 @@ footer {
         justify-content: space-between;
         align-items: center;
         position: relative;
+        z-index: 1001;
     }
 
     .logo {
         font-size: 1.1rem; /* Riduciamo leggermente il font del nome */
+    }
+
+    .nav-brand {
+        position: relative;
+        z-index: 1100; /* Valore più alto del menu (che è 1000) */
     }
 
     .nav-links {
@@ -506,19 +512,19 @@ footer {
         width: 100vw;            /* 100% della larghezza dello schermo */
         height: 100vh;           /* 100% dell'altezza dello schermo */
         background-color: var(--bg-color); /* Usa il bianco del tuo tema */
-        z-index: 999;            /* Sta sotto alla X (che ha 1001) */
+        z-index: 1000;            /* Sta sotto alla X (che ha 1001) */
         margin-left: 0 !important; /* Mantiene la correzione di prima */
-        padding: 0;
+        padding-top: 150px;
     }
 
     /* Opzionale: rimette in ordine i link quando sono a tendina */
     .nav-links.active li {
-        margin: 25px 0;
+        margin: 20px 0;
     }
 
     .nav-links.active li a {
         color: var(--text-main); /* Il tuo verde! Così non avrai testo bianco su sfondo bianco */
-        font-size: 2rem;
+        font-size: 1.8rem;
         font-weight: 600;
         display: inline-block;
         transition: color 0.3s ease;
@@ -550,7 +556,7 @@ footer {
         width: 30px;
         height: 21px;
         cursor: pointer;
-        z-index: 1001; /* Deve stare sopra l'header */
+        z-index: 1100; /* Deve stare sopra l'header */
         position: relative;
     }
 
