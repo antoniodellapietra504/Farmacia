@@ -498,30 +498,34 @@ footer {
     .nav-links.active {
         display: flex !important;
         flex-direction: column;
-        position: absolute;
-        top: 100%; /* Aggiusta questo valore in base all'altezza della tua navbar */
+        justify-content: center; /* Centra i link verticalmente */
+        align-items: center;     /* Centra i link orizzontalmente */
+        position: fixed;         /* Lo fissa rispetto alla finestra del dispositivo */
+        top: 0;                  /* Copre partendo dal primissimo pixel in alto */
         left: 0;
-        width: 100%;
-        background-color: #ffffff; /* Colore di sfondo del menu a tendina */
-        padding: 20px 0;
-        box-shadow: 0 5px 10px rgba(0,0,0,0.1); /* Piccola ombra per staccarlo dal fondo */
-        text-align: center;
-        z-index: 9999;
-        margin-left: 0 !important;
+        width: 100vw;            /* 100% della larghezza dello schermo */
+        height: 100vh;           /* 100% dell'altezza dello schermo */
+        background-color: var(--bg-color); /* Usa il bianco del tuo tema */
+        z-index: 999;            /* Sta sotto alla X (che ha 1001) */
+        margin-left: 0 !important; /* Mantiene la correzione di prima */
+        padding: 0;
     }
 
     /* Opzionale: rimette in ordine i link quando sono a tendina */
     .nav-links.active li {
-        margin: 15px 0;
-        list-style: none;
+        margin: 25px 0;
     }
 
     .nav-links.active li a {
         color: var(--text-main); /* Il tuo verde! Così non avrai testo bianco su sfondo bianco */
-        font-size: 1.2rem;
+        font-size: 2rem;
         font-weight: 600;
         display: inline-block;
-        padding: 10px 0;
+        transition: color 0.3s ease;
+    }
+
+    .nav-links.active li a:hover {
+        color: var(--primary-color);
     }
 
     .nav-icon-container {
