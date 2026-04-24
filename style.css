@@ -162,22 +162,25 @@ header {
     display: flex;
     justify-content: center;
     align-items: center;
-    border-radius: 0 0 40px 40px; 
+    border-radius: 0 0 70px 70px; 
     box-shadow: none !important; 
     
     margin-right: 20px;
     z-index: 10;
     margin-left: 0;
+    transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.4s ease;
 }
 
 .nav-icon-container img {
     width: 200px; /* Dimensione logo adattata */
     height: auto;
-    padding-top: 15px; 
+    padding-top: 30px; 
+    transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
 .nav-icon-container:hover {
-    transform: scale(1.05); /* Leggero ingrandimento al passaggio del mouse */
+    transform: translateY(-4px);
+    transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.4s ease;
 }
 
 /* Testo "Farmacia dei Tigli" */
@@ -197,6 +200,14 @@ header {
     gap: 8px;
     margin-right: 0; /* Reset */
     white-space: nowrap; /* Impedisce al testo di andare a capo */
+    transition: all 0.3s ease;
+}
+
+/* Effetto sollevamento al passaggio del mouse sul nome */
+.logo a:hover {
+    transform: translateY(-2px);
+    /* Opzionale: puoi anche aggiungere una leggerissima ombra al testo per staccarlo ancora di più */
+    text-shadow: 0 4px 8px rgba(0,0,0,0.05);
 }
 
 .logo a span {
@@ -211,18 +222,26 @@ header {
     list-style: none;
     gap: 30px;
     align-items: center;
-    margin-left: 600px;/*Qesto è il trucco: spinge tutti i link verso destra! */
+    margin-left: auto;/*Qesto è il trucco: spinge tutti i link verso destra! */
 }
 
 .nav-links a {
     font-family: var(--font-text);
     font-weight: 500;
     color: var(--text-light);
-    transition: color 0.3s;
+    /* Modifichiamo la transition per includere tutto e aggiungiamo display */
+    transition: all 0.2s ease; 
+    display: inline-block;
+}
+
+.nav-links a:active {
+    transform: scale(0.90);
+    color: var(--primary-color);
 }
 
 .nav-links a:hover {
     color: var(--primary-color);
+    transform: translateY(-2px); /* Fa alzare il testo di 2 pixel */
 }
 
 .menu-toggle {
@@ -461,7 +480,7 @@ footer {
 /* =========================================
    9. RESPONSIVITÀ - VERSIONE MOBILE
    ========================================= */
-@media (max-width: 1024px) and (min-width: 769px) {
+@media (max-width: 1024px) {
     .navbar {
         padding: 0 15px; /* Riduciamo i padding laterali */
         display: flex;
@@ -551,11 +570,12 @@ footer {
 
     .nav-icon-container {
         width: 150px; /* Riduciamo leggermente la dimensione della conca */
-        height: 100px;
+        height: 120px;
+        padding-top: 5px;
     }
 
     .nav-icon-container img {
-        width: 160px; /* Adattiamo il logo interno */
+        width: 220px; /* Adattiamo il logo interno */
     }
     
     .hero{
@@ -627,4 +647,164 @@ footer {
         max-width: 100%;
     }
 
+}
+
+/* =========================================
+   10. RESPONSIVITÀ - VERSIONE SMARTPHONE
+   ========================================= */
+@media (max-width: 768px) {
+    .navbar{
+        padding-left: 0;
+    }
+    /* Adattamento Header e Logo per schermi molto piccoli */
+    .nav-icon-container {
+        width: 110px;
+        height: 95px;
+        margin-right: 15px;
+        margin-left: 0;
+        border-radius: 0 0 55px 55px; /* Arrotondamento armonizzato */
+    }
+    
+    .nav-icon-container img {
+        width: 190px;
+        padding-top: 25px;
+    }
+
+    .logo a {
+        font-size: 1rem;
+        margin-left: 0;
+        line-height: 1.2;
+        /* Su schermi molto stretti impiliamo il testo del logo */
+        flex-direction: column; 
+        gap: 2px;
+        align-items: flex-start;
+    }
+
+    /* Hero Section - Ottimizzazione spazi e tipografia */
+    .hero {
+        padding-top: 120px !important;
+        padding-bottom: 50px;
+        min-height: auto;
+    }
+
+    .hero h1 {
+        font-size: 2rem; /* Testo più piccolo per evitare che occupi tutto lo schermo */
+        margin-bottom: 15px;
+    }
+
+    .hero p {
+        font-size: 1rem;
+        margin-bottom: 30px;
+    }
+
+    .btn-primary, .btn-secondary {
+        padding: 10px 20px;
+        font-size: 0.95rem;
+    }
+
+    /* Wellness Hub (Chi Siamo) */
+    .wellness-hub {
+        padding: 60px 0;
+    }
+
+    .hub-container {
+        padding-top: 20px;
+        gap: 30px;
+    }
+
+    .wellness-hub h2 {
+        font-size: 1.8rem;
+    }
+
+    .hub-image-slider {
+        height: 250px; /* Slider molto più compatto per smartphone */
+        border-radius: 16px;
+    }
+
+    /* Servizi - Mettiamo le card in una singola colonna verticale */
+    .services {
+        padding: 60px 5%;
+    }
+
+    .services h2 {
+        font-size: 1.8rem;
+        margin-bottom: 40px;
+    }
+
+    .services-grid {
+        grid-template-columns: 1fr; /* Forza 1 singola colonna */
+        gap: 20px;
+    }
+
+    .service-card {
+        padding: 30px 20px;
+    }
+
+    /* Contatti - Singola colonna verticale */
+    .contacts-section {
+        padding: 60px 5% 40px;
+    }
+
+    .contacts-container h2 {
+        font-size: 1.8rem;
+    }
+
+    .info-grid {
+        grid-template-columns: 1fr; /* Forza 1 singola colonna */
+        gap: 30px;
+        margin-top: 30px;
+    }
+
+    /* 1. Il menu ora è FIXED per coprire tutto indipendentemente dallo scroll */
+    .nav-links {
+        display: flex;
+        flex-direction: column;
+        justify-content: center; /* Centra i link verticalmente per un look più pulito */
+        align-items: center;
+        position: fixed;         /* CAMBIATO: da absolute a fixed */
+        top: 0;                  /* Parte dall'inizio della pagina */
+        left: 0;
+        width: 100%;
+        height: 100dvh;          /* CAMBIATO: usa l'altezza dinamica del dispositivo */
+        background-color: var(--bg-color); /* Bianco pieno, non trasparente */
+        z-index: 1000;
+        margin-left: 0 !important;
+        
+        /* Gestione apertura/chiusura */
+        opacity: 0;              /* Invisibile di base */
+        visibility: hidden;      /* Non cliccabile di base */
+        pointer-events: none;
+        
+        /* Transizione fluida in dissolvenza */
+        transition: all 0.4s ease-in-out;
+    }
+
+    /* 2. Stato quando il menù è aperto */
+    .nav-links.active {
+        opacity: 1;              /* Diventa visibile */
+        visibility: visible;     /* Diventa cliccabile */
+        pointer-events: auto;
+        padding-top: 70px;       /* Lascia spazio per l'header se vuoi che l'hamburger resti visibile */
+    }
+
+    .nav-links li a {
+        transition: all 1s ease; /* Transizione fluida per il colore e il movimento */
+    }
+
+    /* Effetto quando il tasto viene premuto (Active) o toccato */
+    .nav-links li a:active, 
+    .nav-links li a:focus {
+        color: var(--primary-color) !important; /* Diventa verde immediatamente */
+        transform: scale(0.9);                 /* Effetto pressione (si rimpicciolisce leggermente) */
+        opacity: 0.8;                           /* Feedback visivo aggiuntivo */
+    }
+
+    /* Assicuriamoci che l'hamburger rimanga sopra il menù bianco */
+    .menu-toggle {
+        z-index: 1002 !important; 
+    }
+    
+    .nav-brand {
+        z-index: 1002 !important;
+    }
 }

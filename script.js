@@ -15,6 +15,9 @@ menu.addEventListener('click', function() {
     }
 });
 
+// Sblocca le animazioni :active sui dispositivi touch (iOS/Android)
+document.addEventListener("touchstart", function() {}, {passive: true});
+
 // Chiude il menu quando si clicca su un link
 document.querySelectorAll('.nav-links a').forEach(n => n.addEventListener('click', () => {
     menu.classList.remove('is-active');
