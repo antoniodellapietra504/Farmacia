@@ -58,34 +58,78 @@ dots.forEach((dot, index) => {
 });
 
 // =========================================
-// GESTIONE COOKIE BANNER
+// GESTIONE COOKIE BANNER & GOOGLE MAPS (REVERSIBILE)
 // =========================================
 const cookieBanner = document.getElementById('cookie-banner');
 const acceptBtn = document.getElementById('accept-cookies');
 const rejectBtn = document.getElementById('reject-cookies');
+const mapContainer = document.getElementById('map-container');
 
-// Controlla nel browser (localStorage) se l'utente ha già fatto una scelta in passato
-if (!localStorage.getItem('cookieConsent')) {
-    // Se non c'è scelta, mostra il banner dopo 1 secondo per non essere troppo aggressivi
-    setTimeout(() => {
-        cookieBanner.classList.add('show');
-    }, 1000);
-} else {
-    // QUI IN FUTURO: 
-    // Se localStorage.getItem('cookieConsent') === 'accepted', 
-    // farai partire i codici di Google Analytics e Google Maps.
+// Salviamo il contenuto originale del placeholder per poterlo ripristinare
+const mapPlaceholderHTML = `
+    <div class="map-placeholder">
+        <p>Accetta i cookie di terze parti per visualizzare la mappa interattiva di Google Maps.</p>
+        <button id="accept-map-cookies" class="btn-primary" style="margin-top: 15px; font-size: 0.9rem; padding: 8px 20px;">Accetta e Mostra Mappa</button>
+    </div>
+`;
+
+// Funzione per caricare la mappa
+function loadGoogleMaps() {
+    if (mapContainer) {
+        mapContainer.innerHTML = '<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3016.54!2d14.52!3d40.92!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNDDCsDU1JzI0LjAiTiAxNMKwMzEnMTIuMCJF!5e0!3m2!1sit!2sit!4v1234567890" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>';
+    }
 }
 
-// Se l'utente clicca "Accetta tutti"
+// Funzione per rimuovere la mappa e ripristinare il placeholder
+function removeGoogleMaps() {
+    if (mapContainer) {
+        mapContainer.innerHTML = mapPlaceholderHTML;
+        // Essendo il bottone nuovo (creato via innerHTML), dobbiamo riattaccare il listener
+        attachMapBtnListener();
+    }
+}
+
+// Funzione per gestire il click sul bottone "Accetta e Mostra Mappa" dentro il riquadro
+function attachMapBtnListener() {
+    const acceptMapBtn = document.getElementById('accept-map-cookies');
+    if (acceptMapBtn) {
+        acceptMapBtn.addEventListener('click', () => {
+            localStorage.setItem('cookieConsent', 'accepted');
+            cookieBanner.classList.remove('show');
+            loadGoogleMaps();
+        });
+    }
+}
+
+// Controllo iniziale
+if (localStorage.getItem('cookieConsent') === 'accepted') {
+    loadGoogleMaps();
+} else if (!localStorage.getItem('cookieConsent')) {
+    setTimeout(() => { cookieBanner.classList.add('show'); }, 1000);
+}
+
+// TASTO ACCETTA TUTTI (dal banner)
 acceptBtn.addEventListener('click', () => {
-    localStorage.setItem('cookieConsent', 'accepted'); // Salva la scelta nel browser
-    cookieBanner.classList.remove('show');             // Nasconde il banner
-    
-    // QUI IN FUTURO: Farai partire i codici di Analytics e Maps in tempo reale
+    localStorage.setItem('cookieConsent', 'accepted');
+    cookieBanner.classList.remove('show');
+    loadGoogleMaps();
 });
 
-// Se l'utente clicca "Rifiuta non necessari"
+// TASTO RIFIUTA (dal banner) - ORA OSCURA LA MAPPA
 rejectBtn.addEventListener('click', () => {
-    localStorage.setItem('cookieConsent', 'rejected'); // Salva la scelta
-    cookieBanner.classList.remove('show');             // Nasconde il banner
+    localStorage.setItem('cookieConsent', 'rejected');
+    cookieBanner.classList.remove('show');
+    removeGoogleMaps(); // <--- Questa è la riga fondamentale che oscura la mappa
 });
+
+// RIAPRI BANNER DAL FOOTER
+const reopenCookieBtn = document.getElementById('reopen-cookie-banner');
+if (reopenCookieBtn) {
+    reopenCookieBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        cookieBanner.classList.add('show');
+    });
+}
+
+// Inizializza il listener per il bottone della mappa al caricamento
+attachMapBtnListener();
