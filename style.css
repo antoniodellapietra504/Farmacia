@@ -75,6 +75,7 @@ a:focus-visible, button:focus-visible, .menu-toggle:focus-visible {
     font-weight: 600;
     transition: all 0.3s ease;
     display: inline-block;
+    border: none;
 }
 
 .btn-primary:hover {
@@ -806,5 +807,59 @@ footer {
     
     .nav-brand {
         z-index: 1002 !important;
+    }
+}
+
+/* =========================================
+   11. COOKIE BANNER
+   ========================================= */
+.cookie-banner {
+    position: fixed;
+    bottom: -150%; /* Nascondiamo il banner di default fuori dallo schermo */
+    left: 0;
+    width: 100%;
+    background-color: var(--bg-color);
+    box-shadow: 0 -4px 25px rgba(0,0,0,0.15);
+    padding: 20px 5%;
+    z-index: 9999; /* Deve stare sopra a tutto, anche al menu */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+    transition: bottom 0.6s cubic-bezier(0.25, 1, 0.5, 1); /* Animazione fluida in entrata */
+    text-align: center;
+}
+
+/* Questa classe verrà aggiunta dal Javascript per mostrare il banner */
+.cookie-banner.show {
+    bottom: 0;
+}
+
+.cookie-banner p {
+    font-size: 0.9rem;
+    color: var(--text-light);
+    margin: 0;
+    max-width: 800px;
+}
+
+.cookie-banner p a {
+    color: var(--primary-color);
+    text-decoration: underline;
+    font-weight: 600;
+}
+
+.cookie-buttons {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+/* Su Desktop mettiamo testo a sinistra e bottoni a destra */
+@media (min-width: 769px) {
+    .cookie-banner {
+        flex-direction: row;
+        text-align: left;
     }
 }

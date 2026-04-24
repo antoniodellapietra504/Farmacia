@@ -57,3 +57,35 @@ dots.forEach((dot, index) => {
     });
 });
 
+// =========================================
+// GESTIONE COOKIE BANNER
+// =========================================
+const cookieBanner = document.getElementById('cookie-banner');
+const acceptBtn = document.getElementById('accept-cookies');
+const rejectBtn = document.getElementById('reject-cookies');
+
+// Controlla nel browser (localStorage) se l'utente ha già fatto una scelta in passato
+if (!localStorage.getItem('cookieConsent')) {
+    // Se non c'è scelta, mostra il banner dopo 1 secondo per non essere troppo aggressivi
+    setTimeout(() => {
+        cookieBanner.classList.add('show');
+    }, 1000);
+} else {
+    // QUI IN FUTURO: 
+    // Se localStorage.getItem('cookieConsent') === 'accepted', 
+    // farai partire i codici di Google Analytics e Google Maps.
+}
+
+// Se l'utente clicca "Accetta tutti"
+acceptBtn.addEventListener('click', () => {
+    localStorage.setItem('cookieConsent', 'accepted'); // Salva la scelta nel browser
+    cookieBanner.classList.remove('show');             // Nasconde il banner
+    
+    // QUI IN FUTURO: Farai partire i codici di Analytics e Maps in tempo reale
+});
+
+// Se l'utente clicca "Rifiuta non necessari"
+rejectBtn.addEventListener('click', () => {
+    localStorage.setItem('cookieConsent', 'rejected'); // Salva la scelta
+    cookieBanner.classList.remove('show');             // Nasconde il banner
+});
