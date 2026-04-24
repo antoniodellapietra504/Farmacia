@@ -519,7 +519,7 @@ footer {
         max-height: 0;          /* Chiuso: altezza zero */
         overflow: hidden;       /* Taglia tutto ciò che sta fuori */
         padding: 0;             /* Nessuno spazio quando è chiuso */
-        
+        height: 100dvh;
         /* Animazione morbida che fa crescere l'altezza in basso */
         transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1), padding 0.5s ease;
     }
