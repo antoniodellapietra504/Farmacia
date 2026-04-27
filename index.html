@@ -3,15 +3,58 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Farmacia dei Tigli</title>
+    <title>Farmacia dei Tigli | Casalnuovo di Napoli</title>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@500;600;700&display=swap" rel="stylesheet">
     
-    <meta name="description" content="PharmaNova a Nola: la tua salute, resa più intelligente. Professionalità e innovazione al tuo servizio.">
-    
+    <meta name="description" content="Benvenuti alla Farmacia dei Tigli (PharmaNova) a Nola. Uniamo consulenza esperta, servizi CUP online e prodotti di dermocosmesi per la tua salute e il tuo benessere.">    
     <link rel="stylesheet" href="style.css">
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Pharmacy",
+        "name": "Farmacia dei Tigli",
+        "image": "https://www.tuosito.it/LOGO-4x.png",
+        "@id": "https://www.farmaciadeitigli.it",
+        "url": "https://www.farmaciadeitigli.it",
+        "telephone": "081-XXX-XXXX",
+        "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "Via Variante VII",
+            "addressLocality": "Nola",
+            "addressRegion": "NA",
+            "postalCode": "80035",
+            "addressCountry": "IT"
+        },
+        "geo": {
+            "@type": "GeoCoordinates",
+            "latitude": 40.926, 
+            "longitude": 14.523
+        },
+        "openingHoursSpecification": [
+            {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": [
+                "Monday",
+                "Tuesday",
+                "Wednesday",
+                "Thursday",
+                "Friday",
+                "Saturday"
+            ],
+            "opens": "08:30",
+            "closes": "20:30"
+            }
+        ],
+        "sameAs": [
+            "https://www.facebook.com/tuapagina",
+            "https://www.instagram.com/tuapagina"
+        ]
+    }
+    </script>
 </head>
 
 <body>
@@ -19,7 +62,7 @@
         <nav class="navbar">
             <div class="nav-brand">
                 <div class="nav-icon-container">
-                    <a href="#"><img src="LOGO-4X.png" alt="Icona Farmacia"></a>
+                    <img src="LOGO-4X.png" alt="Logo Farmacia dei Tigli a Casalnuovo di Napoli">
                 </div>
 
                 <div class="logo">
@@ -60,9 +103,9 @@
         
                 <div class="hub-image-slider">
                     <div class="slider-wrapper">
-                        <img src="example_foto1.webp" alt="Interno Farmacia 1" class="slide">
-                        <img src="example_foto2.webp" alt="Interno Farmacia 2" class="slide">
-                        <img src="example_foto3.webp" alt="Staff Farmacia" class="slide">
+                        <img src="example_foto1.webp" alt="Ingresso esterno della Farmacia dei Tigli a Casalnuovo" class="slide" loading="lazy">
+                        <img src="example_foto2.webp" alt="Interno della farmacia con scaffali per dermocosmesi e integrazione" class="slide" loading="lazy">
+                        <img src="example_foto3.webp" alt="Staff specializzato Farmacia dei Tigli" class="slide" loading="lazy">
                     </div>
                     <div class="slider-dots">
                         <span class="dot active"></span>
@@ -97,22 +140,27 @@
         <section id="contatti" class="contacts-section">
             <div class="contacts-container">
                 <h2>Vieni a trovarci</h2>
+                <div id="map-container" class="map-container">
+                    <div class="map-placeholder">
+                        <p>Accetta i cookie di terze parti per visualizzare la mappa interattiva di Google Maps.</p>
+                        <button id="accept-map-cookies" class="btn-primary" style="margin-top: 15px; font-size: 0.9rem; padding: 8px 20px;">Accetta e Mostra Mappa</button>
+                    </div>
+                </div>
+
                 <div class="info-grid">
                     <div class="info-item">
                         <h4>Indirizzo</h4>
-                        <p>Via Variante VII, Nola (NA)</p>
+                        <p>Viale dei Tigli 19, Casalnuovo di Napoli</p>
+                    </div>
+                    <div class="info-item">
+                        <h4>Orari</h4>
+                        <p>Lun - Sab: 08:30 - 20:30</p>
+                        <p>Domenica: Chiuso</p>
                     </div>
                     <div class="info-item">
                         <h4>Contatti</h4>
                         <p>Tel: 081 XXX XXXX</p>
                         <p>Email: info@pharmanova.it</p>
-                    </div>
-                </div>
-
-                <div id="map-container" class="map-container">
-                    <div class="map-placeholder">
-                        <p>Accetta i cookie di terze parti per visualizzare la mappa interattiva di Google Maps.</p>
-                        <button id="accept-map-cookies" class="btn-primary" style="margin-top: 15px; font-size: 0.9rem; padding: 8px 20px;">Accetta e Mostra Mappa</button>
                     </div>
                 </div>
             </div>
