@@ -2,6 +2,27 @@ const menu = document.querySelector('#mobile-menu');
 const menuLinks = document.querySelector('.nav-links');
 const navbar = document.querySelector('.navbar'); // Seleziona la navbar
 
+//Transizioni
+document.addEventListener("DOMContentLoaded", function() {
+  const elements = document.querySelectorAll('.fade-in-section');
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-visible');
+        // Rimuovi il commento (le due sbarrette) dalla riga sotto se vuoi che l'animazione avvenga una volta sola
+        // observer.unobserve(entry.target);
+      }
+    });
+  }, {
+    threshold: 0.15 // Si attiva quando il 15% dell'elemento entra nello schermo
+  });
+
+  elements.forEach(element => {
+    observer.observe(element);
+  });
+});
+
 // Toggle Menu
 menu.addEventListener('click', function() {
     menu.classList.toggle('is-active');

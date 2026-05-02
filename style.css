@@ -64,6 +64,19 @@ a:focus-visible, button:focus-visible, .menu-toggle:focus-visible {
     outline-offset: 4px;
 }
 
+/* ANIMAZIONE FADE-IN UP SCROLL */
+.fade-in-section {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+  will-change: opacity, transform;
+}
+
+.fade-in-section.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
 /* =========================================
    3. COMPONENTI (Bottoni)
    ========================================= */
