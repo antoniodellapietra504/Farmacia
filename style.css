@@ -672,8 +672,25 @@ footer {
         width: 220px; /* Adattiamo il logo interno */
     }
     
-    .hero{
-        padding-top: 150px !important; /* Aumenta questo valore finché la scritta non è libera */
+    /* Hero tablet: altezza moderata, testo centrato verticalmente e orizzontalmente */
+    .hero {
+        min-height: clamp(480px, 56vh, 680px);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 150px 5% 52px !important;
+        text-align: center;
+        width: 100%;
+        max-width: none;
+    }
+
+    .hero-content {
+        flex: 0 0 auto;
+        width: 100%;
+        max-width: 640px;
+        margin-left: auto;
+        margin-right: auto;
         text-align: center;
     }
 
@@ -717,11 +734,10 @@ footer {
         transform: translateY(-9px) rotate(-45deg);
     }
 
-    /* 1. Usiamo .hub-container invece di .wellness-hub */
-    .hero, .hub-container {
-        flex-direction: column; 
+    .hub-container {
+        flex-direction: column;
         text-align: center;
-        padding-top: 80px; /* Ridotto perché senza logo la hero è più leggera */
+        padding-top: 80px;
         gap: 40px;
     }
 
@@ -757,10 +773,6 @@ footer {
     .hero h1 {
         font-size: 2.5rem;
     }
-    
-    .hero-content {
-        max-width: 100%;
-    }
 
 }
 
@@ -795,20 +807,41 @@ footer {
         align-items: flex-start;
     }
 
-    /* Hero Section - Ottimizzazione spazi e tipografia */
+    /* Hero Section - un po’ più alta, scritta sempre centrata */
     .hero {
-        padding-top: 120px !important;
-        padding-bottom: 50px;
-        min-height: auto;
+        min-height: clamp(420px, 62vh, 600px);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 120px 5% 56px !important;
+        text-align: center;
+        width: 100%;
+        max-width: none;
+    }
+
+    .hero-content {
+        flex: 0 0 auto;
+        width: 100%;
+        max-width: 34rem;
+        margin-left: auto;
+        margin-right: auto;
+        text-align: center;
     }
 
     .hero h1 {
-        font-size: 2rem; /* Testo più piccolo per evitare che occupi tutto lo schermo */
+        font-size: 2rem;
+        text-align: center;
+        margin-left: auto;
+        margin-right: auto;
         margin-bottom: 15px;
     }
 
     .hero p {
         font-size: 1rem;
+        text-align: center;
+        margin-left: auto;
+        margin-right: auto;
         margin-bottom: 30px;
     }
 
