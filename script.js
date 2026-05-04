@@ -47,36 +47,173 @@ document.querySelectorAll('.nav-links a').forEach(n => n.addEventListener('click
     document.body.style.overflow = 'auto';
 }));
 
-// Logica per lo slider "Chi Siamo"
-const wrapper = document.querySelector('.slider-wrapper');
+// --- Slider "Chi Siamo: anteprime strette, opacità da scroll, easing su click ---
+const sliderWrapper = document.querySelector('.slider-wrapper');
+const slides = document.querySelectorAll('.slider-wrapper .slide');
 const dots = document.querySelectorAll('.dot');
-let currentIndex = 0;
 
-function updateSlider(index) {
-    // Sposta il wrapper orizzontalmente del 33.33% per ogni slide
-    wrapper.style.transform = `translateX(-${index * 33.333}%)`;
-    
-    // Aggiorna i puntini
-    dots.forEach(dot => dot.classList.remove('active'));
-    dots[index].classList.add('active');
-}
+if (sliderWrapper && slides.length > 0) {
+  let scrollRaf = null;
+  let animRaf = null;
 
-// Funzione per andare alla prossima slide
-function nextSlide() {
-    currentIndex = (currentIndex + 1) % 3; // Ricomincia dopo la terza foto
-    updateSlider(currentIndex);
-}
+  function easeOutQuint(t) {
+    return 1 - (1 - t) ** 5;
+  }
 
-// Cambio automatico ogni 4 secondi
-setInterval(nextSlide, 3000);
-
-// Opzionale: Clic sui puntini per cambiare foto
-dots.forEach((dot, index) => {
-    dot.addEventListener('click', () => {
-        currentIndex = index;
-        updateSlider(currentIndex);
+  function getNearestSlideIndex() {
+    const viewMid = sliderWrapper.scrollLeft + sliderWrapper.clientWidth / 2;
+    let best = 0;
+    let bestDist = Infinity;
+    slides.forEach((slide, i) => {
+      const mid = slide.offsetLeft + slide.offsetWidth / 2;
+      const d = Math.abs(mid - viewMid);
+      if (d < bestDist) {
+        bestDist = d;
+        best = i;
+      }
     });
-});
+    return best;
+  }
+
+  function getScrollLeftForIndex(index) {
+    const slide = slides[index];
+    if (!slide) return 0;
+    const target =
+      slide.offsetLeft + slide.offsetWidth / 2 - sliderWrapper.clientWidth / 2;
+    const maxScroll = sliderWrapper.scrollWidth - sliderWrapper.clientWidth;
+    return Math.max(0, Math.min(target, maxScroll));
+  }
+
+  function updateSlideVisuals() {
+    const viewMid = sliderWrapper.scrollLeft + sliderWrapper.clientWidth / 2;
+    const metrics = [];
+    slides.forEach((slide) => {
+      metrics.push({
+        mid: slide.offsetLeft + slide.offsetWidth / 2,
+        w: slide.offsetWidth
+      });
+    });
+
+    let bestI = 0;
+    let bestFocus = -1;
+    const focuses = [];
+
+    metrics.forEach((m, i) => {
+      const dist = Math.abs(m.mid - viewMid);
+      const range = Math.max(m.w * 0.52, 1);
+      let focus = Math.max(0, Math.min(1, 1 - dist / range));
+      focus *= focus;
+      focuses.push(focus);
+      if (focus > bestFocus) {
+        bestFocus = focus;
+        bestI = i;
+      }
+    });
+
+    slides.forEach((slide, i) => {
+      slide.style.setProperty('--slide-focus', focuses[i].toFixed(4));
+      slide.classList.toggle('is-active', i === bestI);
+      slide.classList.toggle('is-prev', i === bestI - 1);
+      slide.classList.toggle('is-next', i === bestI + 1);
+    });
+
+    dots.forEach((dot, i) => {
+      dot.classList.toggle('active', i === bestI);
+    });
+  }
+
+  function scheduleVisualUpdate() {
+    if (scrollRaf != null) return;
+    scrollRaf = requestAnimationFrame(() => {
+      scrollRaf = null;
+      updateSlideVisuals();
+    });
+  }
+
+  function scrollToIndexInstant(index) {
+    sliderWrapper.scrollLeft = getScrollLeftForIndex(index);
+    updateSlideVisuals();
+  }
+
+  function animateToIndex(index, duration = 680) {
+    if (animRaf != null) cancelAnimationFrame(animRaf);
+    const target = getScrollLeftForIndex(index);
+    const start = sliderWrapper.scrollLeft;
+    const delta = target - start;
+    if (Math.abs(delta) < 1) {
+      updateSlideVisuals();
+      return;
+    }
+
+    sliderWrapper.classList.add('slider-no-snap');
+    const t0 = performance.now();
+
+    function finish() {
+      animRaf = null;
+      sliderWrapper.scrollLeft = target;
+      updateSlideVisuals();
+      requestAnimationFrame(() => {
+        sliderWrapper.classList.remove('slider-no-snap');
+      });
+    }
+
+    function step(now) {
+      const elapsed = now - t0;
+      const t = Math.min(1, elapsed / duration);
+      const eased = easeOutQuint(t);
+      sliderWrapper.scrollLeft = start + delta * eased;
+      updateSlideVisuals();
+      if (t < 1) {
+        animRaf = requestAnimationFrame(step);
+      } else {
+        finish();
+      }
+    }
+
+    animRaf = requestAnimationFrame(step);
+  }
+
+  function goToSlide(index) {
+    animateToIndex(index, 680);
+  }
+
+  sliderWrapper.addEventListener('scroll', scheduleVisualUpdate, { passive: true });
+
+  sliderWrapper.addEventListener(
+    'pointerdown',
+    () => {
+      if (animRaf == null) return;
+      cancelAnimationFrame(animRaf);
+      animRaf = null;
+      sliderWrapper.classList.remove('slider-no-snap');
+    },
+    { passive: true }
+  );
+
+  dots.forEach((dot, index) => {
+    dot.addEventListener('click', () => goToSlide(index));
+  });
+
+  slides.forEach((slide, index) => {
+    slide.addEventListener('click', () => goToSlide(index));
+  });
+
+  window.addEventListener('resize', () => {
+    if (animRaf != null) {
+      cancelAnimationFrame(animRaf);
+      animRaf = null;
+    }
+    sliderWrapper.classList.remove('slider-no-snap');
+    const idx = getNearestSlideIndex();
+    requestAnimationFrame(() => {
+      scrollToIndexInstant(idx);
+    });
+  });
+
+  requestAnimationFrame(() => {
+    scrollToIndexInstant(0);
+  });
+}
 
 // =========================================
 // GESTIONE COOKIE BANNER & GOOGLE MAPS (REVERSIBILE)

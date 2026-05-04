@@ -336,22 +336,24 @@ header {
 .wellness-hub {
     background-color: var(--bg-secondary); /* Il rettangolo grigio */
     width: 100%;
-    padding: 100px 0;        /* Rimuoviamo il padding laterale da qui */
-    max-width: none;         /* Rimuoviamo il limite dei 1200px */
+    padding: 100px 0;
+    max-width: none;
     margin: 0;
+    overflow: hidden; /* Evita che tutto il sito sbandi orizzontalmente */
 }
 
 .hub-container {
-    max-width: 1200px;       /* Mantiene l'allineamento con la Hero e i Servizi */
-    margin: 0 auto;          /* Centra il contenuto nella fascia grigia */
-    padding: 0 5%;           /* Margine di sicurezza interno */
+    max-width: 100%; /* Sostituiamo il 1200px per far uscire lo slider a destra */
+    /* Magia CSS: allinea il testo esattamente come se fosse in un contenitore da 1200px */
+    padding-left: max(5%, calc((100% - 1200px) / 2)); 
     display: flex;
     align-items: center;
-    gap: 80px;
+    gap: 5%; /* Spazio dinamico tra testo e foto */
 }
 
 .hub-content {
-    flex: 1;
+    width: 40%;
+    flex-shrink: 0; /* Evita che il testo si schiacci quando lo schermo si restringe */
 }
 
 .wellness-hub h2 {
@@ -360,31 +362,73 @@ header {
     color: var(--text-main);
 }
 
-/* --- NUOVA LOGICA SLIDER (Sostituisce .hub-image) --- */
+/* --- NUOVA LOGICA SLIDER (APPLE TV STYLE) --- */
 
 .hub-image-slider {
-    flex: 1;
+    width: 55%; /* Prende tutto lo spazio restante a destra */
     position: relative;
-    height: 450px; /* Altezza dello slider */
-    border-radius: 24px;
-    overflow: hidden; /* Fondamentale: nasconde le foto fuori dal riquadro */
-    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+    /* Rimosso border-radius e overflow: hidden da qui, li passiamo alle singole foto */
 }
 
 .slider-wrapper {
     display: flex;
-    width: 300%; /* Spazio totale per 3 foto (100% x 3) */
-    height: 100%;
-    /* Questo permette il movimento fluido quando il JS cambia il transform */
-    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    gap: 10px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: auto; /* lo scroll “morbido” su click è gestito in JS con easing */
+    scroll-padding-inline: max(0px, calc((100% - 82%) / 2));
+    -webkit-overflow-scrolling: touch;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+/* Durante l’animazione JS su scrollLeft lo snap “mandatory” crea scatti: lo si disattiva */
+.slider-wrapper.slider-no-snap {
+    scroll-snap-type: none;
+}
+
+.slider-wrapper::-webkit-scrollbar {
+    display: none; /* Nasconde la barra su Chrome e Safari */
 }
 
 .slide {
-    width: 33.333%; /* Ogni foto occupa un terzo del wrapper */
-    height: 100%;
-    object-fit: cover; /* Evita che le foto si deformino */
+    /* --slide-focus 0–1 impostato da JS: vicini al centro = più opachi */
+    --slide-focus: 0;
+    flex: 0 0 82%;
+    flex-shrink: 0;
+    height: 350px;
+    scroll-snap-align: center;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.12);
+    cursor: pointer;
+    opacity: calc(0.22 + 0.78 * var(--slide-focus, 0));
+    transition: box-shadow 0.4s ease;
 }
 
+.slide.is-active {
+    box-shadow: 0 16px 40px rgba(0,0,0,0.18);
+}
+
+.slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+    pointer-events: none;
+}
+
+/* Anteprima a sinistra: enfatizza il lato sinistro dell’immagine; a destra il lato destro */
+.slide.is-prev img {
+    object-position: left center;
+}
+
+.slide.is-next img {
+    object-position: right center;
+}
+
+/* --- PUNTINI (DOTS) --- */
 .slider-dots {
     position: absolute;
     bottom: 20px;
@@ -398,16 +442,18 @@ header {
 .dot {
     width: 10px;
     height: 10px;
-    background-color: rgba(255, 255, 255, 0.4);
+    background-color: rgba(255, 255, 255, 0.6); /* Leggermente più visibili */
     border-radius: 50%;
     cursor: pointer;
     transition: all 0.3s ease;
 }
 
 .dot.active {
-    background-color: #ffffff; /* Il puntino della foto attiva diventa bianco pieno */
-    transform: scale(1.2);
+    background-color: #ffffff; 
+    width: 25px; /* Forma ovale in stile Apple per indicare quello attivo */
+    border-radius: 5px;
 }
+
 
 /* =========================================
    7. SERVIZI (Grid)
@@ -679,11 +725,32 @@ footer {
         gap: 40px;
     }
 
-    /* 2. .hero-image non esiste più, aggiorniamo il nome dello slider */
+    /* 2. Slider Chi Siamo: stessa logica desktop (altezza slide + puntini sotto) */
     .hub-image-slider {
         width: 100%;
         margin-left: 0;
-        height: 350px; /* Altezza ottimizzata per tablet */
+        height: auto;
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 14px;
+    }
+
+    .hub-image-slider .slider-wrapper {
+        width: 100%;
+        flex: 0 0 auto;
+    }
+
+    .hub-image-slider .slide {
+        height: clamp(280px, 46vw, 380px);
+    }
+
+    .hub-image-slider .slider-dots {
+        position: static;
+        left: auto;
+        transform: none;
+        justify-content: center;
+        padding: 0 8px 2px;
     }
 
     /* 3. Il testo della hero può essere leggermente più piccolo */
@@ -765,8 +832,19 @@ footer {
     }
 
     .hub-image-slider {
-        height: 250px; /* Slider molto più compatto per smartphone */
+        gap: 12px;
+    }
+
+    .hub-image-slider .slider-wrapper {
         border-radius: 16px;
+    }
+
+    .hub-image-slider .slide {
+        height: clamp(220px, 56vw, 300px);
+    }
+
+    .hub-image-slider .slider-dots {
+        padding-bottom: 4px;
     }
 
     /* Servizi - Mettiamo le card in una singola colonna verticale */
