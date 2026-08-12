@@ -1,15 +1,19 @@
 <!DOCTYPE html>
 <html lang="it">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Farmacia dei Tigli | Casalnuovo di Napoli</title>
-    
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@500;600;700&display=swap" rel="stylesheet">
-    
-    <meta name="description" content="Cerchi una farmacia a Casalnuovo? La Farmacia dei Tigli unisce tradizione e innovazione: farmaci, consigli esperti e servizi di telemedicina.">    
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@500;600;700&display=swap"
+        rel="stylesheet">
+
+    <meta name="description"
+        content="Cerchi una farmacia a Casalnuovo? La Farmacia dei Tigli unisce tradizione e innovazione: farmaci, consigli esperti e servizi di telemedicina.">
     <link rel="stylesheet" href="style.css">
 
     <script type="application/ld+json">
@@ -78,7 +82,7 @@
             </ul>
 
             <div class="menu-toggle" id="mobile-menu">
-                <span class="bar"></span> 
+                <span class="bar"></span>
                 <span class="bar"></span>
                 <span class="bar"></span>
             </div>
@@ -87,57 +91,158 @@
 
     <main>
         <section id="home" class="hero">
-             
-            <div class="hero-content">
-                <h1>Farmacia dei Tigli <span class="highlight">Professionisti della tua Salute.</span></h1>
-                <p>Scopri la nostra farmacia a Casalnuovo di Napoli. Dai farmaci da banco ai servizi digitali di telemedicina e CUP, mettiamo la nostra competenza al servizio del tuo benessere con soluzioni rapide e sicure.</p>
+            <div class="hero-container">
+                <div class="hero-content">
+                    <h1>Farmacia dei Tigli <span class="highlight">Professionisti della tua Salute.</span></h1>
+                    <p>Scopri la nostra farmacia a Casalnuovo di Napoli. Dai farmaci da banco ai servizi digitali di
+                        telemedicina e CUP, mettiamo la nostra competenza al servizio del tuo benessere con soluzioni
+                        rapide
+                        e sicure.</p>
+                    <div class="hero-btns">
+                        <a href="#servizi" class="btn-primary">Scopri i servizi</a>
+                        <a href="#contatti" class="btn-secondary">Contattaci</a>
+                    </div>
+                </div>
+
+                <div class="hero-carousel">
+                    <div class="carousel-track" id="hero-carousel-track">
+                        <img src="fronte.webp" alt="Fronte della Farmacia dei Tigli" draggable="false">
+                        <img src="dermocosmesi.webp" alt="Reparto dermocosmesi della Farmacia dei Tigli"
+                            draggable="false">
+                        <img src="solari.webp" alt="Reparto solari della Farmacia dei Tigli" draggable="false">
+                        <img src="medicazioni.webp" alt="Reparto medicazioni della Farmacia dei Tigli"
+                            draggable="false">
+                    </div>
+                    <div class="carousel-dots" id="carousel-dots">
+                        <span class="dot active" data-index="0"></span>
+                        <span class="dot" data-index="1"></span>
+                        <span class="dot" data-index="2"></span>
+                        <span class="dot" data-index="3"></span>
+                    </div>
+                </div>
             </div>
         </section>
+
+        <div class="section-wave">
+            <svg viewBox="0 0 1440 100" preserveAspectRatio="none">
+                <path d="M0,40 C360,100 1080,0 1440,60 L1440,100 L0,100 Z" fill="var(--bg-secondary)" />
+            </svg>
+        </div>
 
         <section id="chi-siamo" class="wellness-hub">
-            <!-- AGGIUNTA CLASSE FADE-IN QUI -->
-            <div class="hub-container fade-in-section">
-                <div class="hub-content">
-                    <h2>Oltre la Farmacia: il tuo Punto di Riferimento per il Benessere.</h2>
-                    <p>Alla Farmacia dei Tigli crediamo che la vera salute nasca dalla prevenzione e dalla cura costante della persona. Per questo, mettiamo la nostra competenza e il nostro ascolto al servizio del tuo equilibrio quotidiano.</p>
-                </div>
-        
-                <div class="hub-image-slider">
-                    <div class="slider-wrapper">
-                        <div class="slide"><img src="example_foto1.webp" alt="Ingresso esterno della Farmacia dei Tigli a Casalnuovo" loading="lazy"></div>
-                        <div class="slide"><img src="example_foto2.webp" alt="Interno della farmacia con scaffali per dermocosmesi e integrazione" loading="lazy"></div>
-                        <div class="slide"><img src="example_foto3.webp" alt="Staff specializzato Farmacia dei Tigli" loading="lazy"></div>
+            <div class="hub-container">
+
+                <!-- COLONNA SINISTRA: Testo -->
+                <div class="hub-text fade-in-section">
+                    <h2>Chi <span class="highlight">Siamo</span></h2>
+                    <p class="hub-description">
+                        Un team di professionisti con una passione in comune: la cura della persona. La nostra forza è
+                        la sinergia creata dal <strong>Dott. Ovidio Della Pietra</strong>, dal <strong>Dott. Marco Donnarumma</strong> e dalla <strong>Dott.ssa
+                        Ida Della Pietra</strong>. Uniamo la solidità di una lunga esperienza farmaceutica con l'energia e
+                        l'aggiornamento continuo, per offrirti non solo un farmaco, ma un consiglio sempre attento,
+                        sicuro e su misura per te.
+                    </p>
+
+                    <!-- Punto 1: Esperienza -->
+                    <div class="hub-feature">
+                        <div class="hub-feature-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                            </svg>
+                        </div>
+                        <div class="hub-feature-text">
+                            <h4>Sicurezza e Affidabilità</h4>
+                            <p>Mettiamo a tua disposizione la nostra solida
+                                pratica farmaceutica quotidiana. Troverai sempre
+                                un professionista pronto ad ascoltarti e a guidarti
+                                con competenza verso le scelte migliori.</p>
+                        </div>
                     </div>
-                    <div class="slider-dots">
-                        <span class="dot active"></span>
-                        <span class="dot"></span>
-                        <span class="dot"></span>
+
+                    <!-- Punto 2: Innovazione -->
+                    <div class="hub-feature">
+                        <div class="hub-feature-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="12" cy="12" r="10" />
+                                <polyline points="12 6 12 12 16 14" />
+                            </svg>
+                        </div>
+                        <div class="hub-feature-text">
+                            <h4>La Salute, Senza Attese</h4>
+                            <p>Semplifichiamo la gestione del tuo benessere.
+                                Sfruttiamo i migliori strumenti digitali per garantirti
+                                prenotazioni, telemedicina e servizi diagnostici in modo
+                                rapido ed efficiente.</p>
+                        </div>
                     </div>
                 </div>
-                
+
+
             </div>
         </section>
 
+        <div class="section-wave section-wave--reverse">
+            <svg viewBox="0 0 1440 100" preserveAspectRatio="none">
+                <path d="M0,40 C360,100 1080,0 1440,60 L1440,100 L0,100 Z" fill="var(--bg-color)" />
+            </svg>
+        </div>
+
         <section id="servizi" class="services">
-            <h2>Progettato per Precisione, Sicurezza, e Benessere</h2>
+            <h2 class="slide-in-left">Progettato per Precisione, Sicurezza, e Benessere</h2>
             <div class="services-grid">
-                <!-- AGGIUNTA CLASSE FADE-IN QUI -->
-                <div class="service-card fade-in-section">
-                    <div class="icon-placeholder"></div>
+                <!-- Servizio 1 -->
+                <div class="service-card fade-in-section" style="transition-delay: 0s;">
+                    <div class="icon-placeholder">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                            style="width: 24px; height: 24px; color: var(--primary-color);">
+                            <path d="M22 12h-4l-3 9L9 3l-3 9H2"></path>
+                        </svg>
+                    </div>
+                    <h3>Holter Cardiaco</h3>
+                    <p>Monitoraggio continuo dell'attività cardiaca nelle 24/48 ore.</p>
+                </div>
+                <!-- Servizio 2 -->
+                <div class="service-card fade-in-section" style="transition-delay: 0.15s;">
+                    <div class="icon-placeholder">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                            style="width: 24px; height: 24px; color: var(--primary-color);">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <polyline points="12 6 12 12 16 14"></polyline>
+                        </svg>
+                    </div>
+                    <h3>Holter Pressorio</h3>
+                    <p>Misurazione della pressione arteriosa durante le normali attività quotidiane.</p>
+                </div>
+                <!-- Servizio 3 -->
+                <div class="service-card fade-in-section" style="transition-delay: 0.3s;">
+                    <div class="icon-placeholder">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                            style="width: 24px; height: 24px; color: var(--primary-color);">
+                            <path d="M2 12h4l2-3 4 6 2-3h4"></path>
+                        </svg>
+                    </div>
+                    <h3>ECG</h3>
+                    <p>Elettrocardiogramma refertato da specialisti in tempi rapidi.</p>
+                </div>
+                <!-- Servizio 4 -->
+                <div class="service-card fade-in-section" style="transition-delay: 0.45s;">
+                    <div class="icon-placeholder">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                            style="width: 24px; height: 24px; color: var(--primary-color);">
+                            <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                            <line x1="16" y1="2" x2="16" y2="6"></line>
+                            <line x1="8" y1="2" x2="8" y2="6"></line>
+                            <line x1="3" y1="10" x2="21" y2="10"></line>
+                        </svg>
+                    </div>
                     <h3>CUP Online</h3>
                     <p>Prenota esami e visite in pochi clic, senza attese inutili.</p>
-                </div>
-                <!-- AGGIUNTA CLASSE FADE-IN QUI -->
-                <div class="service-card fade-in-section">
-                    <div class="icon-placeholder"></div>
-                    <h3>Consulenza Expert</h3>
-                    <p>Dermocosmesi e integrazione curata dai nostri specialisti.</p>
-                </div>
-                <!-- AGGIUNTA CLASSE FADE-IN QUI -->
-                <div class="service-card fade-in-section">
-                    <div class="icon-placeholder"></div>
-                    <h3>Wellness Hub</h3>
-                    <p>Percorsi personalizzati basati sulle tue esigenze uniche.</p>
                 </div>
             </div>
         </section>
@@ -145,11 +250,13 @@
         <section id="contatti" class="contacts-section">
             <!-- AGGIUNTA CLASSE FADE-IN QUI -->
             <div class="contacts-container fade-in-section">
-                <h2>Vieni a trovarci</h2>
+                <h2 class="slide-in-left">Vieni a trovarci</h2>
                 <div id="map-container" class="map-container">
                     <div class="map-placeholder">
                         <p>Accetta i cookie di terze parti per visualizzare la mappa interattiva di Google Maps.</p>
-                        <button id="accept-map-cookies" class="btn-primary" style="margin-top: 15px; font-size: 0.9rem; padding: 8px 20px;">Accetta e Mostra Mappa</button>
+                        <button id="accept-map-cookies" class="btn-primary"
+                            style="margin-top: 15px; font-size: 0.9rem; padding: 8px 20px;">Accetta e Mostra
+                            Mappa</button>
                     </div>
                 </div>
 
@@ -160,36 +267,60 @@
                     </div>
                     <div class="info-item">
                         <h4>Orari</h4>
-                        <p>Lun - Sab: 08:30 - 20:30</p>
+                        <p>Lun - Sab: 9:00 - 20:00</p>
                         <p>Domenica: Chiuso</p>
                     </div>
                     <div class="info-item">
                         <h4>Contatti</h4>
-                        <p>Tel: 081 XXX XXXX</p>
-                        <p>Email: info@pharmanova.it</p>
+                        <p>Tel: 081 17863002</p>
+                        <p>Email: farmaciadeitigli@outlook.it</p>
                     </div>
                 </div>
+            </div>
+        </section>
+
+        <section class="review-cta fade-in-section">
+            <div class="review-container">
+                <h2>Sei soddisfatto del nostro servizio?</h2>
+                <p>La tua opinione è importante per noi. Lascia una recensione per aiutarci a crescere e a migliorare
+                    ogni giorno.</p>
+                <a href="https://g.page/r/CVI62EsPDN5XEBM/review" target="_blank" rel="noopener noreferrer"
+                    class="btn-white">
+                    Lascia una recensione
+                </a>
             </div>
         </section>
 
     </main>
 
     <footer>
-        <p>&copy; 2026 Farmacia PharmaNova. Tutti i diritti riservati. | P.IVA 0123456789 <br>
-           <a href="privacy.html" style="text-decoration: underline;">Privacy Policy</a> | 
-           <a href="cookie.html" style="text-decoration: underline;">Cookie Policy</a> | 
-           <a href="#" id="reopen-cookie-banner" style="text-decoration: underline;">Gestisci Cookie</a>
+        <p>&copy; 2026 Farmacia dei Tigli. Tutti i diritti riservati. | P.IVA 03234090649 <br>
+            <a href="privacy.html" style="text-decoration: underline;">Privacy Policy</a> |
+            <a href="cookie.html" style="text-decoration: underline;">Cookie Policy</a> |
+            <a href="#" id="reopen-cookie-banner" style="text-decoration: underline;">Gestisci Cookie</a>
         </p>
-        
+
         <div id="cookie-banner" class="cookie-banner">
-            <p>Utilizziamo cookie tecnici per il funzionamento del sito e, con il tuo consenso, cookie statistici e di profilazione per migliorare la tua esperienza. <a href="cookie.html">Leggi la Cookie Policy</a>.</p>
+            <p>Utilizziamo cookie tecnici per il funzionamento del sito e, con il tuo consenso, cookie statistici e di
+                profilazione per migliorare la tua esperienza. <a href="cookie.html">Leggi la Cookie Policy</a>.</p>
             <div class="cookie-buttons">
-                <button id="accept-cookies" class="btn-primary" style="padding: 8px 20px; font-size: 0.9rem;">Accetta tutti</button>
-                <button id="reject-cookies" class="btn-secondary" style="padding: 8px 20px; font-size: 0.9rem;">Rifiuta non necessari</button>
+                <button id="accept-cookies" class="btn-primary" style="padding: 8px 20px; font-size: 0.9rem;">Accetta
+                    tutti</button>
+                <button id="reject-cookies" class="btn-secondary" style="padding: 8px 20px; font-size: 0.9rem;">Rifiuta
+                    non necessari</button>
             </div>
         </div>
     </footer>
 
+    <a href="https://wa.me/3908117863002" class="whatsapp-float" target="_blank" rel="noopener noreferrer"
+        aria-label="Contattaci su WhatsApp">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="30" height="30" fill="currentColor">
+            <path
+                d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z" />
+        </svg>
+    </a>
+
     <script src="script.js"></script>
 </body>
+
 </html>

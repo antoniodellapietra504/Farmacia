@@ -3,13 +3,19 @@
    ========================================= */
 :root {
     /* Palette "Tech/Benessere" basata sulla tua reference */
-    --primary-color: #4BA46F; /* Verde brillante e fresco */
-    --primary-hover: #3D8A5B; /* Verde scuro per l'hover dei bottoni */
-    --bg-color: #ffffff;      /* Bianco puro per lo sfondo principale */
-    --bg-secondary: #f8fafc;  /* Grigio chiarissimo per staccare le sezioni */
-    --text-main: #0f172a;     /* Antracite scuro per i testi (molto più elegante del nero puro) */
-    --text-light: #64748b;    /* Grigio medio per i paragrafi */
-    
+    --primary-color: #4BA46F;
+    /* Verde brillante e fresco */
+    --primary-hover: #3D8A5B;
+    /* Verde scuro per l'hover dei bottoni */
+    --bg-color: #ffffff;
+    /* Bianco puro per lo sfondo principale */
+    --bg-secondary: #f8fafc;
+    /* Grigio chiarissimo per staccare le sezioni */
+    --text-main: #0f172a;
+    /* Antracite scuro per i testi (molto più elegante del nero puro) */
+    --text-light: #64748b;
+    /* Grigio medio per i paragrafi */
+
     /* Tipografia */
     --font-heading: 'Poppins', sans-serif;
     --font-text: 'Inter', sans-serif;
@@ -27,7 +33,7 @@
 html {
     /* Questo crea quell'effetto di scorrimento morbido 
        quando clicchi sui link del menu */
-    scroll-behavior: smooth; 
+    scroll-behavior: smooth;
 }
 
 body {
@@ -35,11 +41,14 @@ body {
     color: var(--text-main);
     background-color: var(--bg-color);
     line-height: 1.6;
-    overflow-x: hidden; /* Evita fastidiosi scroll orizzontali */
+    overflow-x: hidden;
+    /* Evita fastidiosi scroll orizzontali */
 }
 
 /* Tipografia Globale */
-h1, h2, h3 {
+h1,
+h2,
+h3 {
     font-family: var(--font-heading);
     line-height: 1.2;
 }
@@ -50,31 +59,71 @@ a {
 }
 
 /* Rimuove l'effetto "rettangolo blu" al click su link e bottoni */
-a, button, .menu-toggle {
+a,
+button,
+.menu-toggle {
     /* Rimuove l'evidenziazione azzurra del tap su smartphone (iOS e Android) */
-    -webkit-tap-highlight-color: transparent; 
-    
+    -webkit-tap-highlight-color: transparent;
+
     /* Rimuove il bordo blu di focus quando si clicca (Desktop e Android) */
-    outline: none; 
+    outline: none;
 }
 
 /* Opzionale: se vuoi mantenere l'accessibilità per chi naviga con la tastiera (Tab) */
-a:focus-visible, button:focus-visible, .menu-toggle:focus-visible {
+a:focus-visible,
+button:focus-visible,
+.menu-toggle:focus-visible {
     outline: 2px solid var(--primary-color);
     outline-offset: 4px;
 }
 
 /* ANIMAZIONE FADE-IN UP SCROLL */
 .fade-in-section {
-  opacity: 0;
-  transform: translateY(30px);
-  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
-  will-change: opacity, transform;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+    will-change: opacity, transform;
 }
 
 .fade-in-section.is-visible {
-  opacity: 1;
-  transform: none;
+    opacity: 1;
+    transform: none;
+}
+
+/* ANIMAZIONE HERO STAGGERED FADE-UP */
+@keyframes heroFadeUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.hero-content h1 {
+    opacity: 0;
+    animation: heroFadeUp 0.8s ease-out 0.2s forwards;
+}
+
+.hero-content p {
+    opacity: 0;
+    animation: heroFadeUp 0.8s ease-out 0.5s forwards;
+}
+
+/* ANIMAZIONE SLIDE-IN DA SINISTRA */
+.slide-in-left {
+    opacity: 0;
+    transform: translateX(-40px);
+    transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+    will-change: opacity, transform;
+}
+
+.slide-in-left.is-visible {
+    opacity: 1;
+    transform: translateX(0);
 }
 
 /* =========================================
@@ -84,7 +133,8 @@ a:focus-visible, button:focus-visible, .menu-toggle:focus-visible {
     background-color: var(--primary-color);
     color: white;
     padding: 12px 28px;
-    border-radius: 50px; /* Forma "a pillola" tipica del design SaaS */
+    border-radius: 50px;
+    /* Forma "a pillola" tipica del design SaaS */
     font-weight: 600;
     transition: all 0.3s ease;
     display: inline-block;
@@ -93,7 +143,8 @@ a:focus-visible, button:focus-visible, .menu-toggle:focus-visible {
 
 .btn-primary:hover {
     background-color: var(--primary-hover);
-    transform: translateY(-2px); /* Piccolo effetto di sollevamento al passaggio del mouse */
+    transform: translateY(-2px);
+    /* Piccolo effetto di sollevamento al passaggio del mouse */
     box-shadow: 0 4px 12px rgba(34, 197, 94, 0.3);
 }
 
@@ -114,7 +165,8 @@ a:focus-visible, button:focus-visible, .menu-toggle:focus-visible {
 
 .btn-nav {
     background-color: var(--primary-color);
-    color: white !important; /* Forza il testo bianco */
+    color: white !important;
+    /* Forza il testo bianco */
     padding: 10px 24px;
     border-radius: 50px;
     font-weight: 600;
@@ -136,21 +188,40 @@ header {
     position: fixed;
     top: 0;
     width: 100%;
-    background-color: white; 
+    background-color: white;
     z-index: 1000;
     height: 70px;
     display: flex;
     align-items: center;
     /* 1. Il segreto: Questa ombra avvolge sia la barra che la conca come se fossero un pezzo unico */
-    filter: drop-shadow(0 4px 6px rgba(0,0,0,0.07)); 
-    
+    filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.07));
+
     border: none;
     transition: all 0.3s ease;
 }
 
+/* Stato compatto dell'header dopo scroll */
+header.header-scrolled {
+    height: 55px;
+}
+
+header.header-scrolled .nav-icon-container {
+    width: 120px;
+    height: 85px;
+}
+
+header.header-scrolled .nav-icon-container img {
+    width: 160px;
+}
+
+header.header-scrolled .logo a {
+    font-size: 1.35rem;
+}
+
 .navbar {
     display: flex;
-    justify-content: space-between;/* Spinge gli elementi ai lati opposti */
+    justify-content: space-between;
+    /* Spinge gli elementi ai lati opposti */
     align-items: center;
     width: 100%;
     max-width: 100%;
@@ -168,52 +239,61 @@ header {
 
 /* La Conca: ora è spostata a sinistra e "appesa" all'header */
 .nav-icon-container {
-    position: relative; /* Rimosso absolute e centramento */
-    align-self: flex-start; /* Fa partire la conca dal tetto dell'header */
-    background-color: white; 
-    width: 150px;            
-    height: 110px;           /* Sporge dall'header (che è 70px) */
+    position: relative;
+    /* Rimosso absolute e centramento */
+    align-self: flex-start;
+    /* Fa partire la conca dal tetto dell'header */
+    background-color: white;
+    width: 150px;
+    height: 110px;
+    /* Sporge dall'header (che è 70px) */
     display: flex;
     justify-content: center;
     align-items: center;
-    border-radius: 0 0 70px 70px; 
-    box-shadow: none !important; 
-    
+    border-radius: 0 0 70px 70px;
+    box-shadow: none !important;
+
     margin-right: 20px;
     z-index: 10;
     margin-left: 0;
-    transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.4s ease;
+    transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
 .nav-icon-container img {
-    width: 200px; /* Dimensione logo adattata */
+    width: 200px;
+    /* Dimensione logo adattata */
     height: auto;
-    padding-top: 30px; 
-    transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+    padding-top: 30px;
+    transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
 .nav-icon-container:hover {
     transform: translateY(-4px);
-    transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.4s ease;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    /* Added slight shadow to match previous state if desired */
 }
 
 /* Testo "Farmacia dei Tigli" */
 .logo {
-    margin: 0; /* Reset vecchi margini */
+    margin: 0;
+    /* Reset vecchi margini */
     border: none;
 }
 
 .logo a {
     font-family: var(--font-heading);
-    font-size: 1.6rem; /* Ridotto leggermente per stare in linea */
+    font-size: 1.6rem;
+    /* Ridotto leggermente per stare in linea */
     font-weight: 700;
     color: var(--primary-color);
     letter-spacing: 1px;
     text-transform: uppercase;
     display: flex;
     gap: 8px;
-    margin-right: 0; /* Reset */
-    white-space: nowrap; /* Impedisce al testo di andare a capo */
+    margin-right: 0;
+    /* Reset */
+    white-space: nowrap;
+    /* Impedisce al testo di andare a capo */
     transition: all 0.3s ease;
 }
 
@@ -221,7 +301,7 @@ header {
 .logo a:hover {
     transform: translateY(-2px);
     /* Opzionale: puoi anche aggiungere una leggerissima ombra al testo per staccarlo ancora di più */
-    text-shadow: 0 4px 8px rgba(0,0,0,0.05);
+    text-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
 }
 
 .logo a span {
@@ -236,7 +316,8 @@ header {
     list-style: none;
     gap: 30px;
     align-items: center;
-    margin-left: auto;/*Qesto è il trucco: spinge tutti i link verso destra! */
+    margin-left: auto;
+    /*Qesto è il trucco: spinge tutti i link verso destra! */
 }
 
 .nav-links a {
@@ -244,7 +325,7 @@ header {
     font-weight: 500;
     color: var(--text-light);
     /* Modifichiamo la transition per includere tutto e aggiungiamo display */
-    transition: all 0.2s ease; 
+    transition: all 0.2s ease;
     display: inline-block;
 }
 
@@ -255,45 +336,64 @@ header {
 
 .nav-links a:hover {
     color: var(--primary-color);
-    transform: translateY(-2px); /* Fa alzare il testo di 2 pixel */
+    transform: translateY(-2px);
+    /* Fa alzare il testo di 2 pixel */
 }
 
 .menu-toggle {
-    display: none; 
+    display: none;
 }
 
 /* =========================================
    5. HERO SECTION
    ========================================= */
 .hero {
-    padding: 220px 5% 100px; 
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    background-color: var(--bg-color);
+}
+
+.hero::before {
+    content: "";
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background-image: url('LOGO-4x.png');
+    background-size: 150px;
+    background-repeat: repeat;
+    transform: rotate(-30deg);
+    opacity: 0.04;
+    z-index: 0;
+    pointer-events: none;
+}
+
+.hero-container {
+    position: relative;
+    z-index: 1;
+    padding: 140px 5% 100px;
     display: flex;
     align-items: center;
-    justify-content: center; /* Cambiato da space-between a center */
+    justify-content: space-between;
+    gap: 50px;
     max-width: 1200px;
     margin: 0 auto;
     min-height: 90vh;
-    text-align: center;      /* Centra il testo per i contenitori figli */
 }
 
 .hero-content {
     flex: 1;
-    max-width: 800px;        /* Aumentato un po' per una migliore leggibilità senza immagine */
-    text-align: center;      /* Forza l'allineamento centrale del testo */
-    margin: 0 auto;          /* Centra il blocco orizzontalmente */
-}
-
-.hero p {
-    font-size: 1.15rem;
-    color: var(--text-light);
-    margin: 0 auto 40px;     /* Aggiunto auto ai lati per centrare il paragrafo */
     max-width: 600px;
+    text-align: left;
 }
 
 .hero h1 {
     font-size: 3.5rem;
     margin-bottom: 25px;
-    letter-spacing: -1px; /* Stringe leggermente i caratteri, molto moderno */
+    letter-spacing: -1px;
+    /* Stringe leggermente i caratteri, molto moderno */
 }
 
 .highlight {
@@ -312,146 +412,202 @@ header {
     gap: 15px;
 }
 
-/* Trova e aggiorna questa sezione nel tuo style.css */
-.hero-image {
+.hero-carousel {
     flex: 1;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-left: 0;
-    margin-right: 50px;
-    /* Abbiamo rimosso background-color e height fissa per adattarci all'immagine */
-}
-
-.hero-image img {
-    max-width: 100%; /* L'immagine non supererà mai la larghezza del contenitore */
-    height: auto;    /* Mantiene le proporzioni originali */
-    border-radius: 30px; /* Opzionale: mantiene gli angoli arrotondati del tuo design */
-    filter: drop-shadow(0 10px 20px rgba(0,0,0,0.05)); /* Aggiunge un'ombra leggera se l'immagine è trasparente */
-}
-
-/* =========================================
-   6. CHI SIAMO (Wellness Hub)
-   ========================================= */
-.wellness-hub {
-    background-color: var(--bg-secondary); /* Il rettangolo grigio */
-    width: 100%;
-    padding: 100px 0;
-    max-width: none;
-    margin: 0;
-    overflow: hidden; /* Evita che tutto il sito sbandi orizzontalmente */
-}
-
-.hub-container {
-    max-width: 100%; /* Sostituiamo il 1200px per far uscire lo slider a destra */
-    /* Magia CSS: allinea il testo esattamente come se fosse in un contenitore da 1200px */
-    padding-left: max(5%, calc((100% - 1200px) / 2)); 
-    display: flex;
-    align-items: center;
-    gap: 5%; /* Spazio dinamico tra testo e foto */
-}
-
-.hub-content {
-    width: 40%;
-    flex-shrink: 0; /* Evita che il testo si schiacci quando lo schermo si restringe */
-}
-
-.wellness-hub h2 {
-    font-size: 2.5rem;
-    margin-bottom: 20px;
-    color: var(--text-main);
-}
-
-/* --- NUOVA LOGICA SLIDER (APPLE TV STYLE) --- */
-
-.hub-image-slider {
-    width: 55%; /* Prende tutto lo spazio restante a destra */
     position: relative;
-    /* Rimosso border-radius e overflow: hidden da qui, li passiamo alle singole foto */
-}
-
-.slider-wrapper {
-    display: flex;
-    gap: 10px;
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    scroll-behavior: auto; /* lo scroll “morbido” su click è gestito in JS con easing */
-    scroll-padding-inline: max(0px, calc((100% - 82%) / 2));
-    -webkit-overflow-scrolling: touch;
-    -ms-overflow-style: none;
-    scrollbar-width: none;
-}
-
-/* Durante l’animazione JS su scrollLeft lo snap “mandatory” crea scatti: lo si disattiva */
-.slider-wrapper.slider-no-snap {
-    scroll-snap-type: none;
-}
-
-.slider-wrapper::-webkit-scrollbar {
-    display: none; /* Nasconde la barra su Chrome e Safari */
-}
-
-.slide {
-    /* --slide-focus 0–1 impostato da JS: vicini al centro = più opachi */
-    --slide-focus: 0;
-    flex: 0 0 82%;
-    flex-shrink: 0;
-    height: 350px;
-    scroll-snap-align: center;
-    border-radius: 20px;
     overflow: hidden;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.12);
-    cursor: pointer;
-    opacity: calc(0.22 + 0.78 * var(--slide-focus, 0));
-    transition: box-shadow 0.4s ease;
+    border-radius: 30px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+    /* L'animazione fade-up sul contenitore intero */
+    animation: heroFadeUp 0.8s ease-out 0.6s forwards;
+    opacity: 0;
 }
 
-.slide.is-active {
-    box-shadow: 0 16px 40px rgba(0,0,0,0.18);
-}
-
-.slide img {
+.carousel-track {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
     width: 100%;
-    height: 100%;
+    /* Per catturare il drag/swipe: */
+    touch-action: pan-y;
+    cursor: grab;
+}
+
+.carousel-track:active {
+    cursor: grabbing;
+}
+
+.carousel-track img {
+    width: 100%;
+    flex-shrink: 0;
     object-fit: cover;
-    object-position: center;
-    display: block;
     pointer-events: none;
+    /* Impedisce che l'immagine nativa blocchi il drag */
 }
 
-/* Anteprima a sinistra: enfatizza il lato sinistro dell’immagine; a destra il lato destro */
-.slide.is-prev img {
-    object-position: left center;
-}
-
-.slide.is-next img {
-    object-position: right center;
-}
-
-/* --- PUNTINI (DOTS) --- */
-.slider-dots {
+/* Dots Navigation */
+.carousel-dots {
     position: absolute;
     bottom: 20px;
     left: 50%;
     transform: translateX(-50%);
     display: flex;
     gap: 10px;
-    z-index: 5;
+    z-index: 10;
 }
 
 .dot {
-    width: 10px;
-    height: 10px;
-    background-color: rgba(255, 255, 255, 0.6); /* Leggermente più visibili */
+    width: 12px;
+    height: 12px;
+    background-color: rgba(255, 255, 255, 0.5);
     border-radius: 50%;
     cursor: pointer;
     transition: all 0.3s ease;
+    border: 2px solid rgba(255, 255, 255, 0.8);
 }
 
 .dot.active {
-    background-color: #ffffff; 
-    width: 25px; /* Forma ovale in stile Apple per indicare quello attivo */
-    border-radius: 5px;
+    background-color: var(--primary-color);
+    border-color: white;
+    transform: scale(1.2);
+}
+
+/* =========================================
+   6. SEPARATORE A ONDA (Hero → Chi Siamo)
+   ========================================= */
+.section-wave {
+    background-color: var(--bg-color);
+    /* bianco, come la hero */
+    margin-top: -2px;
+    /* elimina micro-gap tra sezioni */
+    line-height: 0;
+}
+
+.section-wave svg {
+    width: 100%;
+    height: 80px;
+    display: block;
+}
+
+.section-wave--reverse {
+    background-color: var(--bg-secondary);
+    /* grigio, come Chi Siamo */
+    margin-top: -1px;
+    /* elimina micro-gap di rendering */
+}
+
+/* =========================================
+   7. CHI SIAMO (Wellness Hub)
+   ========================================= */
+.wellness-hub {
+    background-color: var(--bg-secondary);
+    width: 100%;
+    padding: 80px 5% 100px;
+    max-width: none;
+    margin: 0;
+    overflow: hidden;
+    scroll-margin-top: 90px;
+}
+
+.hub-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 60px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* --- Colonna Testo --- */
+.hub-text {
+    flex: 1;
+    max-width: 800px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.hub-text h2 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+}
+
+.hub-description {
+    font-size: 1.05rem;
+    color: var(--text-light);
+    line-height: 1.8;
+    margin-bottom: 35px;
+}
+
+/* --- Punti Chiave con Icone --- */
+.hub-feature {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 16px;
+    margin-bottom: 32px;
+}
+
+.hub-feature-icon {
+    width: 48px;
+    height: 48px;
+    min-width: 48px;
+    background-color: #f0fdf4;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.hub-feature-icon svg {
+    width: 24px;
+    height: 24px;
+    color: var(--primary-color);
+}
+
+.hub-feature-text h4 {
+    font-family: var(--font-heading);
+    font-size: 1.05rem;
+    margin-bottom: 6px;
+    color: var(--text-main);
+}
+
+.hub-feature-text p {
+    font-size: 0.95rem;
+    color: var(--text-light);
+    line-height: 1.7;
+}
+
+/* --- Colonna Foto (Placeholder 16:9) --- */
+.hub-image {
+    flex: 1.2;
+}
+
+.hub-photo-placeholder {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    background-color: #d1d5db;
+    border-radius: 24px;
+    border: 2px solid var(--primary-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-light);
+    font-size: 1.1rem;
+    font-weight: 500;
+    overflow: hidden;
+}
+
+/* --- Animazione Clip-Path Reveal (da sinistra a destra) --- */
+.clip-reveal {
+    clip-path: inset(0 100% 0 0);
+    transition: clip-path 1.2s cubic-bezier(0.25, 1, 0.5, 1);
+    will-change: clip-path;
+}
+
+.clip-reveal.is-visible {
+    clip-path: inset(0 0 0 0);
 }
 
 
@@ -463,6 +619,7 @@ header {
     max-width: 1200px;
     margin: 0 auto;
     text-align: center;
+    scroll-margin-top: 90px;
 }
 
 .services h2 {
@@ -472,7 +629,8 @@ header {
 
 .services-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr); /* 3 colonne su desktop */
+    grid-template-columns: repeat(4, 1fr);
+    /* 4 colonne su desktop */
     gap: 30px;
 }
 
@@ -487,25 +645,31 @@ header {
 
 .service-card:hover {
     transform: translateY(-10px);
-    box-shadow: 0 20px 40px rgba(0,0,0,0.05);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.05);
     border-color: var(--primary-color);
 }
 
 .icon-placeholder {
     width: 50px;
     height: 50px;
-    background-color: #f0fdf4; /* Verde chiarissimo */
+    background-color: #f0fdf4;
+    /* Verde chiarissimo */
     border-radius: 12px;
     margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 /* =========================================
    8. CONTATTI E FOOTER (Sfondo Scuro)
    ========================================= */
 .contacts-section {
-    background-color: var(--text-main); /* Grigio Antracite scuro */
+    background-color: var(--text-main);
+    /* Grigio Antracite scuro */
     color: white;
     padding: 100px 5% 60px;
+    scroll-margin-top: 90px;
 }
 
 .contacts-container {
@@ -520,7 +684,8 @@ header {
     gap: 40px;
     max-width: 700px;
     margin: 0 auto;
-    text-align: center; /* Centra il testo all'interno dei blocchi*/
+    text-align: center;
+    /* Centra il testo all'interno dei blocchi*/
 }
 
 .info-item h4 {
@@ -535,25 +700,26 @@ footer {
     color: var(--text-light);
     text-align: center;
     padding: 30px 5%;
-    border-top: 1px solid rgba(255,255,255,0.1);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
     font-size: 0.9rem;
 }
 
 .map-container {
     /* Il margine forza lo spazio sopra/sotto e centra il box a destra/sinistra */
-    margin: 40px auto 50px auto !important; 
-    
-    width: 100%; 
-    max-width: 700px; /* La mappa sarà un rettangolo elegante di massimo 700px */
-    height: 350px; 
-    
-    border-radius: 24px; 
+    margin: 40px auto 50px auto !important;
+
+    width: 100%;
+    max-width: 700px;
+    /* La mappa sarà un rettangolo elegante di massimo 700px */
+    height: 350px;
+
+    border-radius: 24px;
     overflow: hidden;
-    background-color: #1e293b; 
+    background-color: #1e293b;
     display: flex;
     align-items: center;
     justify-content: center;
-    border: 1px solid rgba(255,255,255,0.1);
+    border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .map-container iframe {
@@ -575,8 +741,17 @@ footer {
    9. RESPONSIVITÀ - VERSIONE MOBILE
    ========================================= */
 @media (max-width: 1024px) {
+
+    /* Tablet: uniforma l'altezza delle sezioni (esclusa "Chi siamo") */
+    #home,
+    #servizi,
+    #contatti {
+        min-height: 72vh;
+    }
+
     .navbar {
-        padding: 0 15px; /* Riduciamo i padding laterali */
+        padding: 0 15px;
+        /* Riduciamo i padding laterali */
         display: flex;
         justify-content: space-between;
         align-items: center;
@@ -585,60 +760,109 @@ footer {
     }
 
     .logo {
-        font-size: 1.1rem; /* Riduciamo leggermente il font del nome */
+        font-size: 1.1rem;
+        /* Riduciamo leggermente il font del nome */
     }
 
     .nav-brand {
         position: relative;
-        z-index: 1002; /* Valore più alto del menu (che è 1000) */
+        z-index: 1002;
+        /* Valore più alto del menu (che è 1000) */
     }
 
     /* =========================================
        MENU A SARACINESCA (Solo Mobile/Tablet)
        ========================================= */
 
-    /* 1. Il menu è sempre "acceso", ma lo nascondiamo in alto fuori dallo schermo */
+    /* 1. Il menu è sempre "acceso", ma lo nascondiamo con clip-path a cerchio */
     .nav-links {
-        display: flex; /* Addio display: none! */
+        display: flex;
         flex-direction: column;
-        justify-content: flex-start;
+        justify-content: center;
         align-items: center;
-        position: absolute;
-        top: 100%;
+        position: fixed;
+        top: 0;
         left: 0;
-        width: 100%;
+        width: 100vw;
+        height: 100dvh;
         background-color: var(--bg-color);
         z-index: 1000;
-        margin-left: 0 !important; /* Azzera il desktop */
-        max-height: 0;          /* Chiuso: altezza zero */
-        overflow: hidden;       /* Taglia tutto ciò che sta fuori */
-        padding: 0;             /* Nessuno spazio quando è chiuso */
-        height: 100dvh;
-        /* Animazione morbida che fa crescere l'altezza in basso */
-        transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1), padding 0.5s ease;
+        margin-left: 0 !important;
+        padding: 0;
+        overflow: hidden;
+        clip-path: circle(0px at calc(100% - 35px) 35px);
+        transition: clip-path 0.7s cubic-bezier(0.7, 0, 0.3, 1);
+        pointer-events: none;
     }
 
-    /* 2. Quando clicchi l'hamburger, la saracinesca scende a coordinata 0 */
+    /* Watermark Logo (Opzione A: Dinamismo Diagonale) */
+    .nav-links::before {
+        content: "";
+        position: absolute;
+        top: -50%;
+        left: -50%;
+        width: 200%;
+        height: 200%;
+        background-image: url('LOGO-4x.png');
+        background-size: 150px;
+        background-repeat: repeat;
+        transform: rotate(-30deg);
+        opacity: 0.10;
+        z-index: 0;
+        pointer-events: none;
+    }
+
+    /* Copertura bianca per nascondere il pattern sotto la navbar */
+    .nav-links::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 80px;
+        background-color: var(--bg-color);
+        z-index: 1;
+        pointer-events: none;
+    }
+
+    /* 2. Quando clicchi l'hamburger, il cerchio si espande */
     .nav-links.active {
-        max-height: 100vh;      /* Si apre fino a riempire lo schermo */
-        padding-top: 50px;      /* Dà spazio ai testi dall'alto */
-        padding-bottom: 50px;
+        clip-path: circle(150% at calc(100% - 35px) 35px);
+        pointer-events: auto;
     }
 
     /* 3. Stile dei link */
     .nav-links li {
         margin: 20px 0;
         list-style: none;
-        opacity: 0; /* Invisibili finché non si apre */
-        transform: translateY(-10px); /* Leggermente sollevati */
-        transition: opacity 0.3s ease, transform 0.3s ease;
+        position: relative;
+        z-index: 2;
+        opacity: 0;
+        transform: translateY(30px);
+        transition: opacity 0.4s ease, transform 0.4s ease;
     }
 
-    /* Quando il menu riceve "active", i testi diventano visibili con un leggero ritardo */
+    /* Quando il menu riceve "active", i testi diventano visibili */
     .nav-links.active li {
         opacity: 1;
         transform: translateY(0);
-        transition-delay: 0.2s; /* Aspetta che la saracinesca sia scesa un po' */
+    }
+
+    /* Effetto a cascata (staggered fade-up) */
+    .nav-links.active li:nth-child(1) {
+        transition-delay: 0.2s;
+    }
+
+    .nav-links.active li:nth-child(2) {
+        transition-delay: 0.3s;
+    }
+
+    .nav-links.active li:nth-child(3) {
+        transition-delay: 0.4s;
+    }
+
+    .nav-links.active li:nth-child(4) {
+        transition-delay: 0.5s;
     }
 
     .nav-links li a {
@@ -646,7 +870,7 @@ footer {
         font-size: 1.8rem;
         font-weight: 600;
         text-decoration: none;
-        display: inline-block; 
+        display: inline-block;
         transition: all 0.3s ease;
     }
 
@@ -657,23 +881,28 @@ footer {
 
     /* Effetto "Pressione" (Mentre il dito/mouse sta cliccando) */
     .nav-links li a:active {
-        transform: scale(0.95) translateY(0); /* Si rimpicciolisce del 5% e torna giù, effetto molla! */
-        opacity: 1; /* Leggero calo di opacità per confermare il tocco */
-        transition: all 0.2s ease; /* ATTENZIONE: Questa transizione deve essere velocissima (0.1s) per dare l'idea del click immediato */
+        transform: scale(0.95) translateY(0);
+        /* Si rimpicciolisce del 5% e torna giù, effetto molla! */
+        opacity: 1;
+        /* Leggero calo di opacità per confermare il tocco */
+        transition: all 0.2s ease;
+        /* ATTENZIONE: Questa transizione deve essere velocissima (0.1s) per dare l'idea del click immediato */
     }
 
     .nav-icon-container {
-        width: 150px; /* Riduciamo leggermente la dimensione della conca */
+        width: 150px;
+        /* Riduciamo leggermente la dimensione della conca */
         height: 120px;
         padding-top: 5px;
     }
 
     .nav-icon-container img {
-        width: 220px; /* Adattiamo il logo interno */
+        width: 220px;
+        /* Adattiamo il logo interno */
     }
-    
+
     /* Hero tablet: altezza moderata, testo centrato verticalmente e orizzontalmente */
-    .hero {
+    .hero-container {
         min-height: clamp(480px, 56vh, 680px);
         display: flex;
         flex-direction: column;
@@ -683,6 +912,7 @@ footer {
         text-align: center;
         width: 100%;
         max-width: none;
+        gap: 50px;
     }
 
     .hero-content {
@@ -694,15 +924,21 @@ footer {
         text-align: center;
     }
 
+    .hero-btns {
+        justify-content: center;
+    }
+
     /* 1. Assicurati che l'hamburger sia visibile e sopra tutto */
     .menu-toggle {
-        display: flex !important; /* Forza la visibilità */
+        display: flex !important;
+        /* Forza la visibilità */
         flex-direction: column;
         justify-content: space-between;
         width: 30px;
         height: 21px;
         cursor: pointer;
-        z-index: 1002; /* Deve stare sopra l'header */
+        z-index: 1002;
+        /* Deve stare sopra l'header */
         position: relative;
     }
 
@@ -710,7 +946,8 @@ footer {
     .menu-toggle .bar {
         height: 3px;
         width: 100%;
-        background-color: #2d5a27; /* Usa il colore verde della farmacia o nero */
+        background-color: #2d5a27;
+        /* Usa il colore verde della farmacia o nero */
         border-radius: 10px;
         transition: all 0.3s ease;
     }
@@ -718,7 +955,7 @@ footer {
     /* =========================================
        ANIMAZIONE HAMBURGER -> X
        ========================================= */
-       
+
     /* La prima barra scende e ruota di 45 gradi */
     .menu-toggle.is-active .bar:nth-child(1) {
         transform: translateY(9px) rotate(45deg);
@@ -737,36 +974,20 @@ footer {
     .hub-container {
         flex-direction: column;
         text-align: center;
-        padding-top: 80px;
         gap: 40px;
     }
 
-    /* 2. Slider Chi Siamo: stessa logica desktop (altezza slide + puntini sotto) */
-    .hub-image-slider {
-        width: 100%;
-        margin-left: 0;
-        height: auto;
-        display: flex;
-        flex-direction: column;
-        align-items: stretch;
-        gap: 14px;
+    /* La foto va sopra, il testo sotto */
+    .hub-image {
+        order: -1;
     }
 
-    .hub-image-slider .slider-wrapper {
-        width: 100%;
-        flex: 0 0 auto;
-    }
-
-    .hub-image-slider .slide {
-        height: clamp(280px, 46vw, 380px);
-    }
-
-    .hub-image-slider .slider-dots {
-        position: static;
-        left: auto;
-        transform: none;
+    .hub-feature {
         justify-content: center;
-        padding: 0 8px 2px;
+    }
+
+    .section-wave svg {
+        height: 60px;
     }
 
     /* 3. Il testo della hero può essere leggermente più piccolo */
@@ -780,18 +1001,20 @@ footer {
    10. RESPONSIVITÀ - VERSIONE SMARTPHONE
    ========================================= */
 @media (max-width: 768px) {
-    .navbar{
+    .navbar {
         padding-left: 0;
     }
+
     /* Adattamento Header e Logo per schermi molto piccoli */
     .nav-icon-container {
         width: 110px;
         height: 95px;
         margin-right: 15px;
         margin-left: 0;
-        border-radius: 0 0 55px 55px; /* Arrotondamento armonizzato */
+        border-radius: 0 0 55px 55px;
+        /* Arrotondamento armonizzato */
     }
-    
+
     .nav-icon-container img {
         width: 190px;
         padding-top: 25px;
@@ -802,13 +1025,13 @@ footer {
         margin-left: 0;
         line-height: 1.2;
         /* Su schermi molto stretti impiliamo il testo del logo */
-        flex-direction: column; 
+        flex-direction: column;
         gap: 2px;
         align-items: flex-start;
     }
 
     /* Hero Section - un po’ più alta, scritta sempre centrata */
-    .hero {
+    .hero-container {
         min-height: clamp(420px, 62vh, 600px);
         display: flex;
         flex-direction: column;
@@ -818,6 +1041,7 @@ footer {
         text-align: center;
         width: 100%;
         max-width: none;
+        gap: 30px;
     }
 
     .hero-content {
@@ -827,6 +1051,11 @@ footer {
         margin-left: auto;
         margin-right: auto;
         text-align: center;
+    }
+
+    .hero-btns {
+        justify-content: center;
+        flex-wrap: wrap;
     }
 
     .hero h1 {
@@ -845,44 +1074,24 @@ footer {
         margin-bottom: 30px;
     }
 
-    .btn-primary, .btn-secondary {
+    .btn-primary,
+    .btn-secondary {
         padding: 10px 20px;
         font-size: 0.95rem;
     }
 
-    /* Wellness Hub (Chi Siamo) */
-    .wellness-hub {
-        padding: 60px 0;
-    }
-
-    .hub-container {
-        padding-top: 20px;
-        gap: 30px;
-    }
-
-    .wellness-hub h2 {
-        font-size: 1.8rem;
-    }
-
-    .hub-image-slider {
-        gap: 12px;
-    }
-
-    .hub-image-slider .slider-wrapper {
-        border-radius: 16px;
-    }
-
-    .hub-image-slider .slide {
-        height: clamp(220px, 56vw, 300px);
-    }
-
-    .hub-image-slider .slider-dots {
-        padding-bottom: 4px;
-    }
 
     /* Servizi - Mettiamo le card in una singola colonna verticale */
     .services {
         padding: 60px 5%;
+    }
+
+    #servizi {
+        scroll-margin-top: 45px;
+    }
+
+    #contatti {
+        scroll-margin-top: 60px;
     }
 
     .services h2 {
@@ -891,7 +1100,8 @@ footer {
     }
 
     .services-grid {
-        grid-template-columns: 1fr; /* Forza 1 singola colonna */
+        grid-template-columns: repeat(2, 1fr);
+        /* Forza 2 colonne su tablet */
         gap: 20px;
     }
 
@@ -909,7 +1119,8 @@ footer {
     }
 
     .info-grid {
-        grid-template-columns: 1fr; /* Forza 1 singola colonna */
+        grid-template-columns: 1fr;
+        /* Forza 1 singola colonna */
         gap: 30px;
         margin: 0 auto;
         text-align: center;
@@ -919,51 +1130,65 @@ footer {
     .nav-links {
         display: flex;
         flex-direction: column;
-        justify-content: center; /* Centra i link verticalmente per un look più pulito */
+        justify-content: center;
+        /* Centra i link verticalmente per un look più pulito */
         align-items: center;
-        position: fixed;         /* CAMBIATO: da absolute a fixed */
-        top: 0;                  /* Parte dall'inizio della pagina */
+        position: fixed;
+        /* CAMBIATO: da absolute a fixed */
+        top: 0;
+        /* Parte dall'inizio della pagina */
         left: 0;
         width: 100%;
-        height: 100dvh;          /* CAMBIATO: usa l'altezza dinamica del dispositivo */
-        background-color: var(--bg-color); /* Bianco pieno, non trasparente */
+        height: 100dvh;
+        /* CAMBIATO: usa l'altezza dinamica del dispositivo */
+        background-color: var(--bg-color);
+        /* Bianco pieno, non trasparente */
         z-index: 1000;
         margin-left: 0 !important;
-        
+
         /* Gestione apertura/chiusura */
-        opacity: 0;              /* Invisibile di base */
-        visibility: hidden;      /* Non cliccabile di base */
+        opacity: 0;
+        /* Invisibile di base */
+        visibility: hidden;
+        /* Non cliccabile di base */
         pointer-events: none;
-        
+
         /* Transizione fluida in dissolvenza */
         transition: all 0.4s ease-in-out;
     }
 
     /* 2. Stato quando il menù è aperto */
     .nav-links.active {
-        opacity: 1;              /* Diventa visibile */
-        visibility: visible;     /* Diventa cliccabile */
+        opacity: 1;
+        /* Diventa visibile */
+        visibility: visible;
+        /* Diventa cliccabile */
         pointer-events: auto;
-        padding-top: 70px;       /* Lascia spazio per l'header se vuoi che l'hamburger resti visibile */
+        padding-top: 70px;
+        /* Lascia spazio per l'header se vuoi che l'hamburger resti visibile */
     }
 
     .nav-links li a {
-        transition: all 1s ease; /* Transizione fluida per il colore e il movimento */
+        transition: all 1s ease;
+        /* Transizione fluida per il colore e il movimento */
     }
 
     /* Effetto quando il tasto viene premuto (Active) o toccato */
-    .nav-links li a:active, 
+    .nav-links li a:active,
     .nav-links li a:focus {
-        color: var(--primary-color) !important; /* Diventa verde immediatamente */
-        transform: scale(0.9);                 /* Effetto pressione (si rimpicciolisce leggermente) */
-        opacity: 0.8;                           /* Feedback visivo aggiuntivo */
+        color: var(--primary-color) !important;
+        /* Diventa verde immediatamente */
+        transform: scale(0.9);
+        /* Effetto pressione (si rimpicciolisce leggermente) */
+        opacity: 0.8;
+        /* Feedback visivo aggiuntivo */
     }
 
     /* Assicuriamoci che l'hamburger rimanga sopra il menù bianco */
     .menu-toggle {
-        z-index: 1002 !important; 
+        z-index: 1002 !important;
     }
-    
+
     .nav-brand {
         z-index: 1002 !important;
     }
@@ -972,6 +1197,28 @@ footer {
         height: 300px;
         border-radius: 16px;
     }
+
+    /* Chi Siamo - adattamento smartphone */
+    .hub-text h2 {
+        font-size: 1.8rem;
+    }
+
+    .section-wave svg {
+        height: 50px;
+    }
+
+    .hub-photo-placeholder {
+        border-radius: 16px;
+    }
+
+    .wellness-hub {
+        padding: 50px 5% 70px;
+    }
+
+    /* Servizi - Mettiamo le card in una singola colonna su smartphone */
+    .services-grid {
+        grid-template-columns: 1fr;
+    }
 }
 
 /* =========================================
@@ -979,19 +1226,22 @@ footer {
    ========================================= */
 .cookie-banner {
     position: fixed;
-    bottom: -150%; /* Nascondiamo il banner di default fuori dallo schermo */
+    bottom: -150%;
+    /* Nascondiamo il banner di default fuori dallo schermo */
     left: 0;
     width: 100%;
     background-color: var(--bg-color);
-    box-shadow: 0 -4px 25px rgba(0,0,0,0.15);
+    box-shadow: 0 -4px 25px rgba(0, 0, 0, 0.15);
     padding: 20px 5%;
-    z-index: 9999; /* Deve stare sopra a tutto, anche al menu */
+    z-index: 9999;
+    /* Deve stare sopra a tutto, anche al menu */
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
     gap: 15px;
-    transition: bottom 0.6s cubic-bezier(0.25, 1, 0.5, 1); /* Animazione fluida in entrata */
+    transition: bottom 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+    /* Animazione fluida in entrata */
     text-align: center;
 }
 
@@ -1025,5 +1275,135 @@ footer {
     .cookie-banner {
         flex-direction: row;
         text-align: left;
+    }
+}
+
+/* =========================================
+   12. WHATSAPP FLOATING BUTTON
+   ========================================= */
+.whatsapp-float {
+    position: fixed;
+    bottom: 25px;
+    right: 25px;
+    background-color: #25D366;
+    color: white;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 4px 12px rgba(37, 211, 102, 0.4);
+    z-index: 9998;
+    /* Un gradino sotto al cookie-banner che è 9999 */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    animation: pulse-whatsapp 2s infinite;
+}
+
+.whatsapp-float:hover {
+    transform: translateY(-4px) scale(1.05);
+    box-shadow: 0 6px 16px rgba(37, 211, 102, 0.6);
+    /* Mette in pausa l'animazione se ci passi sopra col mouse */
+    animation-play-state: paused;
+}
+
+.whatsapp-float svg {
+    /* Il colore bianco è ereditato da color: white del bottone genitore */
+    width: 32px;
+    height: 32px;
+}
+
+/* Animazione di pulsazione che sfrutta l'ombra */
+@keyframes pulse-whatsapp {
+    0% {
+        box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7);
+    }
+
+    70% {
+        box-shadow: 0 0 0 15px rgba(37, 211, 102, 0);
+    }
+
+    100% {
+        box-shadow: 0 0 0 0 rgba(37, 211, 102, 0);
+    }
+}
+
+/* Adattamento per dispositivi mobili e tablet (Smartphone e Tablet) */
+@media (max-width: 768px) {
+    .whatsapp-float {
+        bottom: 20px;
+        right: 20px;
+        width: 50px;
+        height: 50px;
+    }
+
+    .whatsapp-float svg {
+        width: 26px;
+        height: 26px;
+    }
+}
+
+/* =========================================
+   13. REVIEW CTA
+   ========================================= */
+.review-cta {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 80px 5%;
+    text-align: center;
+}
+
+.review-container {
+    max-width: 800px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+}
+
+.review-cta h2 {
+    font-size: 2.2rem;
+    margin: 0;
+}
+
+.review-cta p {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    margin: 0 0 20px 0;
+    opacity: 0.9;
+}
+
+.btn-white {
+    background-color: white;
+    color: var(--primary-color);
+    padding: 14px 36px;
+    border-radius: 50px;
+    font-weight: 600;
+    font-size: 1.05rem;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.btn-white:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+    color: var(--primary-hover);
+}
+
+@media (max-width: 768px) {
+    .review-cta {
+        padding: 60px 5%;
+    }
+
+    .review-cta h2 {
+        font-size: 1.8rem;
+    }
+
+    .review-cta p {
+        font-size: 1rem;
     }
 }
