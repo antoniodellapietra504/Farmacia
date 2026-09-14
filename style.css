@@ -629,8 +629,8 @@ header.header-scrolled .logo a {
 
 .services-grid {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    /* 4 colonne su desktop */
+    grid-template-columns: repeat(3, 1fr);
+    /* 3 colonne su desktop per 6 servizi */
     gap: 30px;
 }
 
@@ -647,6 +647,7 @@ header.header-scrolled .logo a {
     transform: translateY(-10px);
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.05);
     border-color: var(--primary-color);
+    transition-delay: 0s !important;
 }
 
 .icon-placeholder {
