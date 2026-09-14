@@ -662,6 +662,90 @@ header.header-scrolled .logo a {
 }
 
 /* =========================================
+   7.5 BOOKING CTA
+   ========================================= */
+.booking-cta {
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-hover) 100%);
+    color: white;
+    padding: 80px 5%;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.booking-cta-container {
+    max-width: 900px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 2;
+}
+
+.booking-cta h2 {
+    font-size: 2.2rem;
+    margin-bottom: 40px;
+    font-weight: 700;
+}
+
+.booking-btns {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.btn-whatsapp-large, .btn-phone-large {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    padding: 16px 32px;
+    font-size: 1.1rem;
+    border-radius: 50px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    text-decoration: none;
+}
+
+.btn-whatsapp-large {
+    background-color: #25D366 !important; /* Colore Brand WhatsApp */
+    color: white !important;
+    border: none;
+    box-shadow: 0 10px 20px rgba(37, 211, 102, 0.3);
+    animation: pulse-whatsapp 2s infinite;
+}
+
+.btn-whatsapp-large:hover {
+    background-color: #1ebe57 !important;
+    transform: translateY(-3px);
+    box-shadow: 0 12px 25px rgba(37, 211, 102, 0.4);
+}
+
+.btn-phone-large {
+    background-color: white !important;
+    color: var(--primary-hover) !important;
+    border: 2px solid white !important;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.btn-phone-large:hover {
+    background-color: transparent !important;
+    color: white !important;
+    transform: translateY(-3px);
+}
+
+@keyframes pulse-whatsapp {
+    0% {
+        box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7);
+    }
+    70% {
+        box-shadow: 0 0 0 15px rgba(37, 211, 102, 0);
+    }
+    100% {
+        box-shadow: 0 0 0 0 rgba(37, 211, 102, 0);
+    }
+}
+
+/* =========================================
    8. CONTATTI E FOOTER (Sfondo Scuro)
    ========================================= */
 .contacts-section {
